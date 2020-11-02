@@ -26,6 +26,7 @@ public class Document {
     private String number;
 
     @Column(name = "date", nullable = false)
+    @Temporal(value = TemporalType.DATE)
     private Date date;
 
     @OneToOne
