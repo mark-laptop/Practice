@@ -1,15 +1,3 @@
-CREATE TABLE IF NOT EXISTS Address
-(
-    id      INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version INTEGER             NOT NULL COMMENT 'Служебное поле hibernate',
-    name    VARCHAR(255) UNIQUE NOT NULL COMMENT 'Наименование'
-);
-CREATE UNIQUE INDEX IX_Address_name ON Address (name);
-
-COMMENT ON TABLE Address IS 'Таблица адресов';
-
-
-
 CREATE TABLE IF NOT EXISTS Citizenship
 (
     id      INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
@@ -56,21 +44,19 @@ COMMENT ON TABLE Document IS 'Таблица документов удостов
 
 CREATE TABLE IF NOT EXISTS Organization
 (
-    id         INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version    INTEGER            NOT NULL COMMENT 'Служебное поле hibernate',
-    name       VARCHAR(255)       NOT NULL COMMENT 'Краткое наименование',
-    full_name  VARCHAR(255) COMMENT 'Полное наименование',
-    inn        VARCHAR(12) UNIQUE NOT NULL COMMENT 'ИНН',
-    kpp        VARCHAR(9)         NOT NULL COMMENT 'КПП',
-    address_id INTEGER COMMENT 'Внешний ключ на таблицу адресов',
-    phone      VARCHAR(11) COMMENT 'Номер телефона',
-    is_active  BOOL COMMENT 'Флаг использования',
-    CONSTRAINT FK_Organization_address_id FOREIGN KEY (address_id) REFERENCES Address (id)
+    id        INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+    version   INTEGER            NOT NULL COMMENT 'Служебное поле hibernate',
+    name      VARCHAR(255)       NOT NULL COMMENT 'Краткое наименование',
+    full_name VARCHAR(255) COMMENT 'Полное наименование',
+    inn       VARCHAR(12) UNIQUE NOT NULL COMMENT 'ИНН',
+    kpp       VARCHAR(9)         NOT NULL COMMENT 'КПП',
+    address   VARCHAR(255) COMMENT 'Адрес организации',
+    phone     VARCHAR(11) COMMENT 'Номер телефона',
+    is_active BOOL COMMENT 'Флаг использования'
 );
 CREATE INDEX IX_Organization_name ON Organization (name);
 CREATE UNIQUE INDEX IX_Organization_inn ON Organization (inn);
 CREATE INDEX IX_Organization_phone ON Organization (phone);
-CREATE INDEX IX_Organization_address_id ON Organization (address_id);
 
 COMMENT ON TABLE Organization IS 'Организация';
 
@@ -82,16 +68,14 @@ CREATE TABLE IF NOT EXISTS Office
     version         INTEGER      NOT NULL COMMENT 'Служебное поле hibernate',
     organization_id INTEGER COMMENT 'Внешний ключ на таблицу организации',
     name            VARCHAR(255) NOT NULL COMMENT 'Наименование',
-    address_id      INTEGER COMMENT 'Внешний ключ на таблицу адресов',
+    address         VARCHAR(255) COMMENT 'Адрес офиса',
     phone           VARCHAR(11) COMMENT 'Номер телефона',
     is_active       BOOL COMMENT 'Флаг использования',
-    CONSTRAINT FK_Office_organization_id FOREIGN KEY (organization_id) REFERENCES Organization (id),
-    CONSTRAINT FK_Office_address_id FOREIGN KEY (address_id) REFERENCES Address (id)
+    CONSTRAINT FK_Office_organization_id FOREIGN KEY (organization_id) REFERENCES Organization (id)
 );
 CREATE INDEX IX_Office_name ON Office (name);
 CREATE INDEX IX_Office_phone ON Office (phone);
 CREATE INDEX IX_Office_organization_id ON Office (organization_id);
-CREATE INDEX IX_Office_address_id ON Office (address_id);
 
 COMMENT ON TABLE Office IS 'Офис организации';
 

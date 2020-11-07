@@ -35,19 +35,19 @@ public class User {
     @Column(name = "is_identified")
     private boolean isIdentified;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "office_id")
     private Office office;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "citizenship_id")
     private Citizenship citizenship;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "document_id", unique = true)
     private Document document;
 }
