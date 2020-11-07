@@ -42,7 +42,7 @@ class OfficeController {
     public ResponseEntity<Object> updateOffice(@RequestBody OfficeView officeView) {
         officeService.updateOffice(officeView);
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("data", "success");
+        body.put("result", "success");
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
@@ -50,7 +50,7 @@ class OfficeController {
     public ResponseEntity<Object> saveOffice(@RequestBody OfficeView officeView) {
         officeService.saveOffice(officeView);
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("data", "success");
+        body.put("result", "success");
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 }
