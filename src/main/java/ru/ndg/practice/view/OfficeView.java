@@ -17,7 +17,6 @@ public class OfficeView {
     @ApiModelProperty(value = "Наименование", example = "Головной офис")
     public String name;
 
-    @NotEmpty
     @Size(max = 11)
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;

@@ -29,7 +29,7 @@ public class Document {
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
 }

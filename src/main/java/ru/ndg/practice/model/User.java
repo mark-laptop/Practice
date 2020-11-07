@@ -39,7 +39,7 @@ public class User {
     @JoinColumn(name = "office_id")
     private Office office;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id")
     private Position position;
 
