@@ -41,7 +41,6 @@ public class Organization {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @Column(name = "address")
+    private String address;
 }
