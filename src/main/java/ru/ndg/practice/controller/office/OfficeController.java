@@ -43,7 +43,7 @@ class OfficeController {
         officeService.updateOffice(officeView);
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("result", "success");
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"})
