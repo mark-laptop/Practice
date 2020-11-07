@@ -10,6 +10,7 @@ import ru.ndg.practice.view.UserView;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -23,8 +24,8 @@ class UserController {
     }
 
     @GetMapping(value = {"/list"})
-    public ResponseEntity<Object> getAllUsers() {
-        List<UserView> allUsers = userService.getAllUsers();
+    public ResponseEntity<Object> getAllUsers(@RequestParam(name = "id", required = false) Set<Integer> ids) {
+        List<UserView> allUsers = userService.getAllUsers(ids);
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("data", allUsers);
         return new ResponseEntity<>(body, HttpStatus.OK);

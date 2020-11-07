@@ -10,6 +10,7 @@ import ru.ndg.practice.view.OfficeView;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/office")
@@ -23,8 +24,8 @@ class OfficeController {
     }
 
     @GetMapping(value = {"/list"})
-    public ResponseEntity<Object> getAllOffices() {
-        List<OfficeView> listOffices = officeService.getAllOffices();
+    public ResponseEntity<Object> getAllOffices(@RequestParam(name = "id", required = false) Set<Integer> ids) {
+        List<OfficeView> listOffices = officeService.getAllOffices(ids);
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("data", listOffices);
         return new ResponseEntity<>(body, HttpStatus.OK);

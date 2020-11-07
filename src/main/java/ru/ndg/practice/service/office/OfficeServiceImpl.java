@@ -10,6 +10,7 @@ import ru.ndg.practice.view.OfficeView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -25,8 +26,8 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OfficeView> getAllOffices() {
-        List<Office> listOffices = officeDao.getAll();
+    public List<OfficeView> getAllOffices(Set<Integer> ids) {
+        List<Office> listOffices = officeDao.getAll(ids);
         return mapperFacade.mapAsList(listOffices, OfficeView.class);
     }
 

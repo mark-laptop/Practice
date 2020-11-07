@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class OrganizationDaoImpl implements OrganizationDao {
@@ -21,11 +22,14 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getAll() {
+    public List<Organization> getAll(Set<Integer> ids) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> organizationCriteria = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = organizationCriteria.from(Organization.class);
         organizationCriteria.select(organizationRoot);
+        if (ids != null) {
+            organizationCriteria.where(organizationRoot.get("id").in(ids));
+        }
         return entityManager.createQuery(organizationCriteria).getResultList();
     }
 

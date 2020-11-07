@@ -10,6 +10,7 @@ import ru.ndg.practice.view.UserView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserView> getAllUsers() {
-        List<User> listUsers = userDao.getAll();
+    public List<UserView> getAllUsers(Set<Integer> ids) {
+        List<User> listUsers = userDao.getAll(ids);
         return mapperFacade.mapAsList(listUsers, UserView.class);
     }
 

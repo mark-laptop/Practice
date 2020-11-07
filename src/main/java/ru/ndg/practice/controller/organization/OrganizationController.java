@@ -10,6 +10,7 @@ import ru.ndg.practice.view.OrganizationView;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/organization")
@@ -23,8 +24,8 @@ class OrganizationController {
     }
 
     @GetMapping(value = {"/list"})
-    public ResponseEntity<Object> getAllOrganizations() {
-        List<OrganizationView> listOrganization = organizationService.getAllOrganization();
+    public ResponseEntity<Object> getAllOrganizations(@RequestParam(name = "id", required = false) Set<Integer> ids) {
+        List<OrganizationView> listOrganization = organizationService.getAllOrganization(ids);
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("data", listOrganization);
         return new ResponseEntity<>(body, HttpStatus.OK);

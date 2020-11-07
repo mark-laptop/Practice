@@ -10,6 +10,7 @@ import ru.ndg.practice.view.OrganizationView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -25,8 +26,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationView> getAllOrganization() {
-        List<Organization> listOrganizations = organizationDao.getAll();
+    public List<OrganizationView> getAllOrganization(Set<Integer> ids) {
+        List<Organization> listOrganizations = organizationDao.getAll(ids);
         return mapperFacade.mapAsList(listOrganizations, OrganizationView.class);
     }
 

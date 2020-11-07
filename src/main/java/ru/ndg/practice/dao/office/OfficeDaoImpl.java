@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class OfficeDaoImpl implements OfficeDao {
@@ -21,11 +22,14 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> getAll() {
+    public List<Office> getAll(Set<Integer> ids) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> officeCriteria = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = officeCriteria.from(Office.class);
         officeCriteria.select(officeRoot);
+        if (ids != null) {
+            officeCriteria.where(officeRoot.get("id").in(ids));
+        }
         return entityManager.createQuery(officeCriteria).getResultList();
     }
 

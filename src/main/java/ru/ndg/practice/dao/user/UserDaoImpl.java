@@ -8,7 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -21,11 +24,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(Set<Integer> ids) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> userCriteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = userCriteria.from(User.class);
         userCriteria.select(userRoot);
+        if (ids != null) {
+            userCriteria.where(userRoot.get("id").in(ids));
+        }
         return entityManager.createQuery(userCriteria).getResultList();
     }
 
