@@ -1,11 +1,15 @@
 package ru.ndg.practice.controller.office;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.service.office.OfficeService;
 import ru.ndg.practice.view.OfficeView;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/office")
@@ -19,22 +23,34 @@ class OfficeController {
     }
 
     @GetMapping(value = {"/list"})
-    public List<OfficeView> getAllOffices() {
-        return officeService.getAllOffices();
+    public ResponseEntity<Object> getAllOffices() {
+        List<OfficeView> listOffices = officeService.getAllOffices();
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("data", listOffices);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @GetMapping(value = {"/{id}"})
-    public OfficeView getOfficeById(@PathVariable(name = "id") Integer id) {
-        return officeService.getOffice(id);
+    public ResponseEntity<Object> getOfficeById(@PathVariable(name = "id") Integer id) {
+        OfficeView office = officeService.getOffice(id);
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("data", office);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @PostMapping(value = {"/update"})
-    public void updateOffice(@RequestBody OfficeView officeView) {
+    public ResponseEntity<Object> updateOffice(@RequestBody OfficeView officeView) {
         officeService.updateOffice(officeView);
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("data", "success");
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @PostMapping(value = {"/save"})
-    public void saveOffice(@RequestBody OfficeView officeView) {
+    public ResponseEntity<Object> saveOffice(@RequestBody OfficeView officeView) {
         officeService.saveOffice(officeView);
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("data", "success");
+        return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 }
