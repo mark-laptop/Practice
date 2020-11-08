@@ -8,7 +8,6 @@ import ru.ndg.practice.model.Position;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.PositionView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -39,14 +38,14 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     @Transactional
-    public void savePosition(@Valid PositionView position) {
+    public void savePosition(PositionView position) {
         Position positionEntity = mapperFacade.map(position, Position.class);
         positionDao.save(positionEntity);
     }
 
     @Override
     @Transactional
-    public void updatePosition(@Valid PositionView position) {
+    public void updatePosition(PositionView position) {
         Position positionEntity = mapperFacade.map(position, Position.class);
         positionDao.update(positionEntity);
     }

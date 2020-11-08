@@ -8,7 +8,6 @@ import ru.ndg.practice.model.Document;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.DocumentView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -39,14 +38,14 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     @Transactional
-    public void saveDocument(@Valid DocumentView document) {
+    public void saveDocument(DocumentView document) {
         Document documentEntity = mapperFacade.map(document, Document.class);
         documentDao.save(documentEntity);
     }
 
     @Override
     @Transactional
-    public void updateDocument(@Valid DocumentView document) {
+    public void updateDocument(DocumentView document) {
         Document documentEntity = mapperFacade.map(document, Document.class);
         documentDao.update(documentEntity);
     }

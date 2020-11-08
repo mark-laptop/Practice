@@ -8,7 +8,6 @@ import ru.ndg.practice.model.Citizenship;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.CitizenshipView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -39,14 +38,14 @@ public class CitizenshipServiceImpl implements CitizenshipService {
 
     @Override
     @Transactional
-    public void saveCitizenship(@Valid CitizenshipView citizenship) {
+    public void saveCitizenship(CitizenshipView citizenship) {
         Citizenship citizenshipEntity = mapperFacade.map(citizenship, Citizenship.class);
         citizenshipDao.save(citizenshipEntity);
     }
 
     @Override
     @Transactional
-    public void updateCitizenship(@Valid CitizenshipView citizenship) {
+    public void updateCitizenship(CitizenshipView citizenship) {
         Citizenship citizenshipEntity = mapperFacade.map(citizenship, Citizenship.class);
         citizenshipDao.update(citizenshipEntity);
     }
