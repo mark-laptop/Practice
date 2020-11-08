@@ -6,19 +6,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.ndg.practice.controller.DefaultController;
 import ru.ndg.practice.service.user.UserService;
 import ru.ndg.practice.view.UserView;
 import ru.ndg.practice.view.transfer.out.user.UserById;
 import ru.ndg.practice.view.transfer.out.user.UserList;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/user")
-class UserController {
+class UserController extends DefaultController {
 
     private final UserService userService;
 
@@ -31,33 +30,25 @@ class UserController {
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllUsers(@RequestParam(name = "id", required = false) Set<Integer> ids) {
         List<UserView> allUsers = userService.getAllUsers(ids);
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("data", allUsers);
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return new ResponseEntity<>(putViewInBody("data", allUsers), HttpStatus.OK);
     }
 
     @JsonView(value = {UserById.class})
     @GetMapping(value = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getUserById(@PathVariable(name = "id") Integer id) {
         UserView user = userService.getUser(id);
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("data", user);
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return new ResponseEntity<>(putViewInBody("data", user), HttpStatus.OK);
     }
 
     @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateUser(@RequestBody UserView userView) {
         userService.updateUser(userView);
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("result", "success");
-        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveUser(@RequestBody UserView userView) {
         userService.saveUser(userView);
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("result", "success");
-        return new ResponseEntity<>(body, HttpStatus.CREATED);
+        return new ResponseEntity<>(putViewInBody("result", "success"), HttpStatus.CREATED);
     }
 }
