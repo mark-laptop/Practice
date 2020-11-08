@@ -2,6 +2,7 @@ package ru.ndg.practice.dao.organization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.model.Organization;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 @Repository
 public class OrganizationDaoImpl implements OrganizationDao {
@@ -22,13 +23,15 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getAll(Set<String> nameSet) {
+    public List<Organization> getAll(MultiValueMap<String, String> params) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> organizationCriteria = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = organizationCriteria.from(Organization.class);
         organizationCriteria.select(organizationRoot);
-        if (nameSet != null) {
-            organizationCriteria.where(organizationRoot.get("name").in(nameSet));
+        if (!params.isEmpty()) {
+            for (Map.Entry<String, List<String>> param : params.entrySet()) {
+                organizationCriteria.where(organizationRoot.get(param.getKey()).in(param.getValue()));
+            }
         }
         return entityManager.createQuery(organizationCriteria).getResultList();
     }

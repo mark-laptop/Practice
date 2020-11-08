@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.DefaultController;
 import ru.ndg.practice.service.user.UserService;
@@ -28,8 +29,8 @@ class UserController implements DefaultController {
 
     @JsonView(value = {UserList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllUsers(@RequestParam(name = "officeId", required = false) Set<Integer> officeId) {
-        List<UserView> allUsers = userService.getAllUsers(officeId);
+    public ResponseEntity<Object> getAllUsers(@RequestParam(required = false) MultiValueMap<String, String> params) {
+        List<UserView> allUsers = userService.getAllUsers(params);
         return new ResponseEntity<>(putViewInBody("data", allUsers), HttpStatus.OK);
     }
 

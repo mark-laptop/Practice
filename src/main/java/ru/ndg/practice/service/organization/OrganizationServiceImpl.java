@@ -3,6 +3,7 @@ package ru.ndg.practice.service.organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.organization.OrganizationDao;
 import ru.ndg.practice.model.Organization;
@@ -12,7 +13,6 @@ import ru.ndg.practice.view.transfer.in.organization.OrganizationSave;
 import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -28,8 +28,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationView> getAllOrganization(Set<String> nameSet) {
-        List<Organization> listOrganizations = organizationDao.getAll(nameSet);
+    public List<OrganizationView> getAllOrganization(MultiValueMap<String, String> params) {
+        List<Organization> listOrganizations = organizationDao.getAll(params);
         return mapperFacade.mapAsList(listOrganizations, OrganizationView.class);
     }
 

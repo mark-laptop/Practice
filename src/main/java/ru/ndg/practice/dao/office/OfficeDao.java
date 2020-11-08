@@ -1,13 +1,13 @@
 package ru.ndg.practice.dao.office;
 
+import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.model.Office;
 
 import java.util.List;
-import java.util.Set;
 
 public interface OfficeDao {
 
-    List<Office> getAll(Set<Integer> orgId);
+    List<Office> getAll(MultiValueMap<String, String> params);
     Office getById(Integer id);
     void save(Office office);
     void update(Office office);

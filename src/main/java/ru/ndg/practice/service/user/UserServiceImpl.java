@@ -3,6 +3,7 @@ package ru.ndg.practice.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.user.UserDao;
 import ru.ndg.practice.model.User;
@@ -12,7 +13,6 @@ import ru.ndg.practice.view.transfer.in.user.UserSave;
 import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserView> getAllUsers(Set<Integer> officeId) {
-        List<User> listUsers = userDao.getAll(officeId);
+    public List<UserView> getAllUsers(MultiValueMap<String, String> params) {
+        List<User> listUsers = userDao.getAll(params);
         return mapperFacade.mapAsList(listUsers, UserView.class);
     }
 

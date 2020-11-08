@@ -2,6 +2,7 @@ package ru.ndg.practice.dao.office;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.model.Office;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 @Repository
 public class OfficeDaoImpl implements OfficeDao {
@@ -22,13 +23,15 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> getAll(Set<Integer> orgId) {
+    public List<Office> getAll(MultiValueMap<String, String> params) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> officeCriteria = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = officeCriteria.from(Office.class);
         officeCriteria.select(officeRoot);
-        if (orgId != null) {
-            officeCriteria.where(officeRoot.get("organization").get("id").in(orgId));
+        if (!params.isEmpty()) {
+            for (Map.Entry<String, List<String>> param : params.entrySet()) {
+                officeCriteria.where(officeRoot.get(param.getKey()).in(param.getValue()));
+            }
         }
         return entityManager.createQuery(officeCriteria).getResultList();
     }

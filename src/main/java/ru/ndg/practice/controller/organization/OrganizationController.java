@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.DefaultController;
 import ru.ndg.practice.service.organization.OrganizationService;
@@ -13,7 +14,6 @@ import ru.ndg.practice.view.transfer.out.organization.OrganizationById;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationList;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/organization")
@@ -29,8 +29,8 @@ class OrganizationController implements DefaultController {
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllOrganizations(
-            @RequestParam(name = "name", required = false) Set<String> nameSet) {
-        List<OrganizationView> listOrganization = organizationService.getAllOrganization(nameSet);
+            @RequestParam(required = false) MultiValueMap<String, String> params) {
+        List<OrganizationView> listOrganization = organizationService.getAllOrganization(params);
         return new ResponseEntity<>(putViewInBody("data", listOrganization), HttpStatus.OK);
     }
 

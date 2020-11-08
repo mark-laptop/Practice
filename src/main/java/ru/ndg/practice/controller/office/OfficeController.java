@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.DefaultController;
 import ru.ndg.practice.service.office.OfficeService;
@@ -13,7 +14,6 @@ import ru.ndg.practice.view.transfer.out.office.OfficeById;
 import ru.ndg.practice.view.transfer.out.office.OfficeList;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/office")
@@ -28,8 +28,8 @@ class OfficeController implements DefaultController {
 
     @JsonView(value = {OfficeList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOffices(@RequestParam(name = "orgId", required = false) Set<Integer> OrgId) {
-        List<OfficeView> listOffices = officeService.getAllOffices(OrgId);
+    public ResponseEntity<Object> getAllOffices(@RequestParam(required = false) MultiValueMap<String, String> params) {
+        List<OfficeView> listOffices = officeService.getAllOffices(params);
         return new ResponseEntity<>(putViewInBody("data", listOffices), HttpStatus.OK);
     }
 
