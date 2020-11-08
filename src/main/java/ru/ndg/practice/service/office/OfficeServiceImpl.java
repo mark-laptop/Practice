@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.model.Office;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OfficeView;
-import ru.ndg.practice.view.transfer.in.office.OfficeSave;
-import ru.ndg.practice.view.transfer.in.office.OfficeUpdate;
 
 import java.util.List;
 
@@ -42,14 +39,14 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional
-    public void saveOffice(@Validated(OfficeSave.class) OfficeView office) {
+    public void saveOffice(OfficeView office) {
         Office officeEntity = mapperFacade.map(office, Office.class);
         officeDao.save(officeEntity);
     }
 
     @Override
     @Transactional
-    public void updateOffice(@Validated(OfficeUpdate.class) OfficeView office) {
+    public void updateOffice(OfficeView office) {
         Office officeEntity = mapperFacade.map(office, Office.class);
         officeDao.update(officeEntity);
     }

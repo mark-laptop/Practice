@@ -6,10 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.ControllerUtils;
 import ru.ndg.practice.service.office.OfficeService;
 import ru.ndg.practice.view.OfficeView;
+import ru.ndg.practice.view.transfer.in.office.OfficeSave;
+import ru.ndg.practice.view.transfer.in.office.OfficeUpdate;
 import ru.ndg.practice.view.transfer.out.office.OfficeById;
 import ru.ndg.practice.view.transfer.out.office.OfficeList;
 
@@ -41,13 +44,13 @@ class OfficeController {
     }
 
     @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateOffice(@RequestBody OfficeView officeView) {
+    public ResponseEntity<Object> updateOffice(@RequestBody @Validated(OfficeUpdate.class) OfficeView officeView) {
         officeService.updateOffice(officeView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveOffice(@RequestBody OfficeView officeView) {
+    public ResponseEntity<Object> saveOffice(@RequestBody @Validated(OfficeSave.class) OfficeView officeView) {
         officeService.saveOffice(officeView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }

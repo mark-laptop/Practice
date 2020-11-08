@@ -6,10 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.ControllerUtils;
 import ru.ndg.practice.service.organization.OrganizationService;
 import ru.ndg.practice.view.OrganizationView;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationSave;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationById;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationList;
 
@@ -41,13 +44,13 @@ class OrganizationController {
     }
 
     @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateOrganization(@RequestBody OrganizationView organizationView) {
+    public ResponseEntity<Object> updateOrganization(@RequestBody @Validated(OrganizationUpdate.class) OrganizationView organizationView) {
         organizationService.updateOrganization(organizationView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveOrganization(@RequestBody OrganizationView organizationView) {
+    public ResponseEntity<Object> saveOrganization(@RequestBody @Validated(OrganizationSave.class) OrganizationView organizationView) {
         organizationService.saveOrganization(organizationView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }

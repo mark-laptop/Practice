@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.user.UserDao;
 import ru.ndg.practice.model.User;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.UserView;
-import ru.ndg.practice.view.transfer.in.user.UserSave;
-import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 
 import java.util.List;
 
@@ -42,14 +39,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(@Validated(UserSave.class) UserView user) {
+    public void saveUser(UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
         userDao.save(userEntity);
     }
 
     @Override
     @Transactional
-    public void updateUser(@Validated(UserUpdate.class) UserView user) {
+    public void updateUser(UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
         userDao.update(userEntity);
     }

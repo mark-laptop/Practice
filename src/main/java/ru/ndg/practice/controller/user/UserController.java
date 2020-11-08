@@ -6,10 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ndg.practice.controller.ControllerUtils;
 import ru.ndg.practice.service.user.UserService;
 import ru.ndg.practice.view.UserView;
+import ru.ndg.practice.view.transfer.in.user.UserSave;
+import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 import ru.ndg.practice.view.transfer.out.user.UserById;
 import ru.ndg.practice.view.transfer.out.user.UserList;
 
@@ -41,13 +44,13 @@ class UserController {
     }
 
     @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateUser(@RequestBody UserView userView) {
+    public ResponseEntity<Object> updateUser(@RequestBody @Validated(UserUpdate.class) UserView userView) {
         userService.updateUser(userView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveUser(@RequestBody UserView userView) {
+    public ResponseEntity<Object> saveUser(@RequestBody @Validated(UserSave.class) UserView userView) {
         userService.saveUser(userView);
         return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }
