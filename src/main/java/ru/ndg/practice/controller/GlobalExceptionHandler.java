@@ -5,9 +5,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -27,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), status);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", errors), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", errors), status);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -54,6 +56,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", "Не найден обработчик запроса"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", "Не найден обработчик запроса"), status);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String message = String.format("Метод %s запроса %s не поддерживается", ex.getMethod(), ((ServletWebRequest) request).getRequest().getRequestURI());
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", message), HttpStatus.BAD_REQUEST);
     }
 }
