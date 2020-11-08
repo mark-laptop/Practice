@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.ndg.practice.controller.DefaultController;
+import ru.ndg.practice.controller.ControllerUtils;
 import ru.ndg.practice.service.citizenship.CitizenshipService;
 import ru.ndg.practice.service.document.DocumentService;
 import ru.ndg.practice.view.CitizenshipView;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = {"/api"})
-public class CatalogController implements DefaultController {
+public class CatalogController {
 
     private final DocumentService documentService;
     private final CitizenshipService citizenshipService;
@@ -28,12 +28,12 @@ public class CatalogController implements DefaultController {
     @GetMapping(value = {"/docs"})
     public ResponseEntity<Object> getAllDocuments() {
         List<DocumentView> allDocuments = documentService.getAllDocuments();
-        return new ResponseEntity<>(putViewInBody("docs", allDocuments), HttpStatus.OK);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("docs", allDocuments), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/countries"})
     public ResponseEntity<Object> getDocumentById(@PathVariable(name = "id") Integer id) {
         List<CitizenshipView> allCitizenship = citizenshipService.getAllCitizenship();
-        return new ResponseEntity<>(putViewInBody("countries", allCitizenship), HttpStatus.OK);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("countries", allCitizenship), HttpStatus.OK);
     }
 }

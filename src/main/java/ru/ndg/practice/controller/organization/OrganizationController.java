@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import ru.ndg.practice.controller.DefaultController;
+import ru.ndg.practice.controller.ControllerUtils;
 import ru.ndg.practice.service.organization.OrganizationService;
 import ru.ndg.practice.view.OrganizationView;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationById;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/organization")
-class OrganizationController implements DefaultController {
+class OrganizationController {
 
     private final OrganizationService organizationService;
 
@@ -30,25 +30,25 @@ class OrganizationController implements DefaultController {
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllOrganizations(@RequestParam(required = false) MultiValueMap<String, String> params) {
         List<OrganizationView> listOrganization = organizationService.getAllOrganization(params);
-        return new ResponseEntity<>(putViewInBody("data", listOrganization), HttpStatus.OK);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", listOrganization), HttpStatus.OK);
     }
 
     @JsonView(value = {OrganizationById.class})
     @GetMapping(value = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getOrganizationById(@PathVariable(name = "id") Integer id) {
         OrganizationView organization = organizationService.getOrganization(id);
-        return new ResponseEntity<>(putViewInBody("data", organization), HttpStatus.OK);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", organization), HttpStatus.OK);
     }
 
     @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateOrganization(@RequestBody OrganizationView organizationView) {
         organizationService.updateOrganization(organizationView);
-        return new ResponseEntity<>(putViewInBody("result", "success"), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveOrganization(@RequestBody OrganizationView organizationView) {
         organizationService.saveOrganization(organizationView);
-        return new ResponseEntity<>(putViewInBody("result", "success"), HttpStatus.CREATED);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }
 }
