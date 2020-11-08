@@ -2,14 +2,14 @@ package ru.ndg.practice.model.mapper;
 
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * {@inheritDoc}
  */
-@Service
+@Component
 public class MapperFacadeImpl implements MapperFacade {
     private final MapperFactory mapperFactory;
 

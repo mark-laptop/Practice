@@ -3,13 +3,13 @@ package ru.ndg.practice.model.mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * Фабрика для создания MapperFactory.
  * При необходимости можно добавить кастомные мапперы
  */
-@Service
+@Component
 public class CustomMapperFactory implements FactoryBean<MapperFactory> {
     @Override
     public MapperFactory getObject() {
