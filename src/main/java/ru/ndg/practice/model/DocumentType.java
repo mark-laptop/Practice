@@ -1,8 +1,6 @@
 package ru.ndg.practice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +8,8 @@ import java.util.Objects;
 
 @Entity(name = "Document_type")
 @Table(name = "Document_type")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocumentType {

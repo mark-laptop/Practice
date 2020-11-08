@@ -7,7 +7,8 @@ import java.util.Objects;
 
 @Entity(name = "Citizenship")
 @Table(name = "Citizenship")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Citizenship {
