@@ -8,7 +8,6 @@ import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationById;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationList;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,13 +32,13 @@ public class OrganizationView {
 
     @JsonView(value = {OrganizationById.class})
     @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
-    @Max(12)
+    @Size(max = 12)
     @ApiModelProperty(value = "ИНН", example = "123456789012")
     public String inn;
 
     @JsonView(value = {OrganizationById.class})
     @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
-    @Max(9)
+    @Size(max = 9)
     @ApiModelProperty(value = "КПП", example = "123456789")
     public String kpp;
 
