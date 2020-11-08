@@ -16,23 +16,23 @@ import javax.validation.constraints.Size;
 public class UserView {
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotNull(groups = {UserUpdate.class})
+    @NotNull(groups = {UserUpdate.class}, message = "id не может быть пустым")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
     public Integer id;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotEmpty(groups = {UserUpdate.class, UserSave.class})
-    @Size(max = 50)
+    @NotEmpty(groups = {UserUpdate.class, UserSave.class}, message = "Имя не может быть пустым")
+    @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Имя не может быть больше 50 символов")
     @ApiModelProperty(value = "Имя", example = "Иван")
     public String firstName;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @Size(max = 50)
+    @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Фамилия не модет быть больше 50 символов")
     @ApiModelProperty(value = "Фамилия", example = "Иванов")
     public String secondName;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @Size(max = 50)
+    @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Отчество не может быть больше 50 символов")
     @ApiModelProperty(value = "Отчество", example = "Иванович")
     public String middleName;
 
@@ -41,12 +41,12 @@ public class UserView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;
 
-    @NotNull(groups = {UserSave.class})
+    @NotNull(groups = {UserSave.class}, message = "Офис не может быть пустым")
     @ApiModelProperty(value = "Офис", example = "Головной офис")
     public OfficeView office;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotNull(groups = {UserUpdate.class, UserSave.class})
+    @NotNull(groups = {UserUpdate.class, UserSave.class}, message = "Должность не может быть пустой")
     @ApiModelProperty(value = "Должность", example = "Генеральный директор")
     public PositionView position;
 

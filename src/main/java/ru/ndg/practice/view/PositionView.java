@@ -17,7 +17,7 @@ public class PositionView {
     public Integer id;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotEmpty(groups = {UserUpdate.class, UserSave.class})
+    @NotEmpty(groups = {UserUpdate.class, UserSave.class}, message = "Наименование должности должно быть заполнено")
     @ApiModelProperty(value = "Наименование", example = "Генеральный директор")
     public String name;
 }

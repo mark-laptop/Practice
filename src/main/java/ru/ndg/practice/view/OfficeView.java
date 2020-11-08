@@ -16,12 +16,12 @@ import javax.validation.constraints.Size;
 public class OfficeView {
 
     @JsonView(value = {OfficeList.class, OfficeById.class})
-    @NotNull(groups = {OfficeUpdate.class})
+    @NotNull(groups = {OfficeUpdate.class}, message = "id не может быть пустым")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
     public Integer id;
 
     @JsonView(value = {OfficeList.class, OfficeById.class})
-    @NotNull(groups = {OfficeUpdate.class})
+    @NotNull(groups = {OfficeUpdate.class}, message = "Наименование не должно быть пустым")
     @ApiModelProperty(value = "Наименование", example = "Головной офис")
     public String name;
 
@@ -30,12 +30,12 @@ public class OfficeView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;
 
-    @NotNull(groups = {OfficeSave.class})
+    @NotNull(groups = {OfficeSave.class}, message = "Организация должна быть заполнена")
     @ApiModelProperty(value = "Организация", example = "ООО Ромашка")
     public OrganizationView organization;
 
     @JsonView(value = {OfficeById.class})
-    @NotEmpty(groups = {OfficeUpdate.class})
+    @NotEmpty(groups = {OfficeUpdate.class}, message = "Адрес должен быть заполнен")
     @ApiModelProperty(value = "Адрес", example = "ул. Ленина 2")
     public String address;
 
