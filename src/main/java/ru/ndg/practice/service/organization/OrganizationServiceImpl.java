@@ -8,7 +8,7 @@ import ru.ndg.practice.dao.organization.OrganizationDao;
 import ru.ndg.practice.model.Organization;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OrganizationView;
-import ru.ndg.practice.view.transfer.in.organization.OrganizationNew;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationSave;
 import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional
-    public void saveOrganization(@Validated(OrganizationNew.class) OrganizationView organization) {
+    public void saveOrganization(@Validated(OrganizationSave.class) OrganizationView organization) {
         Organization organizationEntity = mapperFacade.map(organization, Organization.class);
         organizationDao.save(organizationEntity);
     }

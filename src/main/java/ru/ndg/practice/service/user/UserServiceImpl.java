@@ -8,7 +8,7 @@ import ru.ndg.practice.dao.user.UserDao;
 import ru.ndg.practice.model.User;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.UserView;
-import ru.ndg.practice.view.transfer.in.user.UserNew;
+import ru.ndg.practice.view.transfer.in.user.UserSave;
 import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(@Validated(UserNew.class) UserView user) {
+    public void saveUser(@Validated(UserSave.class) UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
         userDao.save(userEntity);
     }

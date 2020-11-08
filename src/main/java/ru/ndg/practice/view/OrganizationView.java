@@ -3,7 +3,7 @@ package ru.ndg.practice.view;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ru.ndg.practice.view.transfer.in.organization.OrganizationNew;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationSave;
 import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationById;
 import ru.ndg.practice.view.transfer.out.organization.OrganizationList;
@@ -22,23 +22,23 @@ public class OrganizationView {
     public Integer id;
 
     @JsonView(value = {OrganizationList.class, OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationNew.class})
+    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
     @ApiModelProperty(value = "Наименование", example = "ООО Ромашка")
     public String name;
 
     @JsonView(value = {OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationNew.class})
+    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
     @ApiModelProperty(value = "Полное наименование", example = "Общество с ограниченной ответственностью Ромашка")
     public String fullName;
 
     @JsonView(value = {OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationNew.class})
+    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
     @Max(12)
     @ApiModelProperty(value = "ИНН", example = "123456789012")
     public String inn;
 
     @JsonView(value = {OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationNew.class})
+    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
     @Max(9)
     @ApiModelProperty(value = "КПП", example = "123456789")
     public String kpp;
@@ -49,7 +49,7 @@ public class OrganizationView {
     public String phone;
 
     @JsonView(value = {OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationNew.class})
+    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
     @ApiModelProperty(value = "Адрес", example = "ул. Ленина 2")
     public String address;
 

@@ -8,7 +8,7 @@ import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.model.Office;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OfficeView;
-import ru.ndg.practice.view.transfer.in.office.OfficeNew;
+import ru.ndg.practice.view.transfer.in.office.OfficeSave;
 import ru.ndg.practice.view.transfer.in.office.OfficeUpdate;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional
-    public void saveOffice(@Validated(OfficeNew.class) OfficeView office) {
+    public void saveOffice(@Validated(OfficeSave.class) OfficeView office) {
         Office officeEntity = mapperFacade.map(office, Office.class);
         officeDao.save(officeEntity);
     }

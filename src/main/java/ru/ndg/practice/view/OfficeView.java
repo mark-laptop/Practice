@@ -3,7 +3,7 @@ package ru.ndg.practice.view;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ru.ndg.practice.view.transfer.in.office.OfficeNew;
+import ru.ndg.practice.view.transfer.in.office.OfficeSave;
 import ru.ndg.practice.view.transfer.in.office.OfficeUpdate;
 import ru.ndg.practice.view.transfer.out.office.OfficeById;
 import ru.ndg.practice.view.transfer.out.office.OfficeList;
@@ -30,7 +30,7 @@ public class OfficeView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;
 
-    @NotNull(groups = {OfficeNew.class})
+    @NotNull(groups = {OfficeSave.class})
     @ApiModelProperty(value = "Организация", example = "ООО Ромашка")
     public OrganizationView organization;
 
