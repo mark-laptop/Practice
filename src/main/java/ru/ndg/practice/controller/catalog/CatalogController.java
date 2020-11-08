@@ -32,7 +32,7 @@ public class CatalogController {
     }
 
     @GetMapping(value = {"/countries"})
-    public ResponseEntity<Object> getDocumentById(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Object> getDocumentById() {
         List<CitizenshipView> allCitizenship = citizenshipService.getAllCitizenship();
         return new ResponseEntity<>(ControllerUtils.putViewInBody("countries", allCitizenship), HttpStatus.OK);
     }
