@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(name = "Document")
 @Table(name = "Document")
@@ -32,4 +33,26 @@ public class Document {
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Document document = (Document) o;
+
+        if (!Objects.equals(id, document.id)) return false;
+        if (!Objects.equals(number, document.number)) return false;
+        if (!Objects.equals(date, document.date)) return false;
+        return Objects.equals(documentType, document.documentType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (documentType != null ? documentType.hashCode() : 0);
+        return result;
+    }
 }

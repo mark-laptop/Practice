@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "Organization")
 @Table(name = "Organization")
@@ -43,4 +44,33 @@ public class Organization {
 
     @Column(name = "address")
     private String address;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Organization that = (Organization) o;
+
+        if (isActive != that.isActive) return false;
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(version, that.version)) return false;
+        if (!Objects.equals(name, that.name)) return false;
+        if (!Objects.equals(fullName, that.fullName)) return false;
+        if (!Objects.equals(inn, that.inn)) return false;
+        if (!Objects.equals(kpp, that.kpp)) return false;
+        if (!Objects.equals(phone, that.phone)) return false;
+        return Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (inn != null ? inn.hashCode() : 0);
+        result = 31 * result + (kpp != null ? kpp.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
 }
