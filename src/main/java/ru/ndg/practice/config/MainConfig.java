@@ -34,23 +34,4 @@ public class MainConfig {
         sessionLocaleResolver.setDefaultLocale(Locale.US);
         return sessionLocaleResolver;
     }
-
-    @Bean
-    public Docket postApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("User")
-                .apiInfo(apiInfo())
-                .select()
-                .paths(regex("/user.*"))
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Spring REST Practice with Swagger")
-                .description("Spring REST Practice with Swagger")
-                .contact("https://github.com/mark-laptop/practice.git")
-                .version("1.0")
-                .build();
-    }
 }
