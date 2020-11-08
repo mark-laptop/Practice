@@ -28,8 +28,7 @@ class OrganizationController implements DefaultController {
 
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOrganizations(
-            @RequestParam(required = false) MultiValueMap<String, String> params) {
+    public ResponseEntity<Object> getAllOrganizations(@RequestParam(required = false) MultiValueMap<String, String> params) {
         List<OrganizationView> listOrganization = organizationService.getAllOrganization(params);
         return new ResponseEntity<>(putViewInBody("data", listOrganization), HttpStatus.OK);
     }
