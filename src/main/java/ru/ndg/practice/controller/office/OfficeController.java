@@ -51,6 +51,4 @@ class OfficeController implements DefaultController {
         officeService.saveOffice(officeView);
         return new ResponseEntity<>(putViewInBody("result", "success"), HttpStatus.CREATED);
     }
-
-
 }
