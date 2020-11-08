@@ -17,7 +17,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/office")
-class OfficeController extends DefaultController {
+class OfficeController implements DefaultController {
 
     private final OfficeService officeService;
 

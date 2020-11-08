@@ -17,7 +17,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/user")
-class UserController extends DefaultController {
+class UserController implements DefaultController {
 
     private final UserService userService;
 

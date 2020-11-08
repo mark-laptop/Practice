@@ -17,7 +17,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/organization")
-class OrganizationController extends DefaultController {
+class OrganizationController implements DefaultController {
 
     private final OrganizationService organizationService;
 
