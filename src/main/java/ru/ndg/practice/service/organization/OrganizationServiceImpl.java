@@ -3,12 +3,14 @@ package ru.ndg.practice.service.organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.organization.OrganizationDao;
 import ru.ndg.practice.model.Organization;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OrganizationView;
+import ru.ndg.practice.view.transfer.organization.OrganizationNew;
+import ru.ndg.practice.view.transfer.organization.OrganizationUpdate;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -40,14 +42,14 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional
-    public void saveOrganization(@Valid OrganizationView organization) {
+    public void saveOrganization(@Validated(OrganizationNew.class) OrganizationView organization) {
         Organization organizationEntity = mapperFacade.map(organization, Organization.class);
         organizationDao.save(organizationEntity);
     }
 
     @Override
     @Transactional
-    public void updateOrganization(@Valid OrganizationView organization) {
+    public void updateOrganization(@Validated(OrganizationUpdate.class) OrganizationView organization) {
         Organization organizationEntity = mapperFacade.map(organization, Organization.class);
         organizationDao.update(organizationEntity);
     }

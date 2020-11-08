@@ -3,12 +3,14 @@ package ru.ndg.practice.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.dao.user.UserDao;
 import ru.ndg.practice.model.User;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.UserView;
+import ru.ndg.practice.view.transfer.user.UserNew;
+import ru.ndg.practice.view.transfer.user.UserUpdate;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -40,14 +42,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(@Valid UserView user) {
+    public void saveUser(@Validated(UserNew.class) UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
         userDao.save(userEntity);
     }
 
     @Override
     @Transactional
-    public void updateUser(@Valid UserView user) {
+    public void updateUser(@Validated(UserUpdate.class) UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
         userDao.update(userEntity);
     }

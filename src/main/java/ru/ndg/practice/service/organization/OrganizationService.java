@@ -2,16 +2,16 @@ package ru.ndg.practice.service.organization;
 
 import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.view.OrganizationView;
+import ru.ndg.practice.view.transfer.organization.OrganizationNew;
+import ru.ndg.practice.view.transfer.organization.OrganizationUpdate;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
-@Validated
 public interface OrganizationService {
 
     List<OrganizationView> getAllOrganization(Set<Integer> ids);
     OrganizationView getOrganization(Integer id);
-    void saveOrganization(@Valid OrganizationView organization);
-    void updateOrganization(@Valid OrganizationView organization);
+    void saveOrganization(@Validated(OrganizationNew.class) OrganizationView organization);
+    void updateOrganization(@Validated(OrganizationUpdate.class) OrganizationView organization);
 }
