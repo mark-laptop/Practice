@@ -62,6 +62,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String message = String.format("Метод %s запроса %s не поддерживается", ex.getMethod(), ((ServletWebRequest) request).getRequest().getRequestURI());
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", message), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", message), status);
     }
 }
