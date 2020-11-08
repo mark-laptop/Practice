@@ -14,7 +14,6 @@ import ru.ndg.practice.view.transfer.out.user.UserById;
 import ru.ndg.practice.view.transfer.out.user.UserList;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/user")
