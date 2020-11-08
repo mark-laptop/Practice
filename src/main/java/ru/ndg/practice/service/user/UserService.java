@@ -2,8 +2,8 @@ package ru.ndg.practice.service.user;
 
 import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.view.UserView;
-import ru.ndg.practice.view.transfer.user.UserNew;
-import ru.ndg.practice.view.transfer.user.UserUpdate;
+import ru.ndg.practice.view.transfer.in.user.UserNew;
+import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 
 import java.util.List;
 import java.util.Set;

@@ -8,8 +8,8 @@ import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.model.Office;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OfficeView;
-import ru.ndg.practice.view.transfer.office.OfficeNew;
-import ru.ndg.practice.view.transfer.office.OfficeUpdate;
+import ru.ndg.practice.view.transfer.in.office.OfficeNew;
+import ru.ndg.practice.view.transfer.in.office.OfficeUpdate;
 
 import java.util.List;
 import java.util.Set;

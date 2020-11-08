@@ -2,8 +2,8 @@ package ru.ndg.practice.service.organization;
 
 import org.springframework.validation.annotation.Validated;
 import ru.ndg.practice.view.OrganizationView;
-import ru.ndg.practice.view.transfer.organization.OrganizationNew;
-import ru.ndg.practice.view.transfer.organization.OrganizationUpdate;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationNew;
+import ru.ndg.practice.view.transfer.in.organization.OrganizationUpdate;
 
 import java.util.List;
 import java.util.Set;
