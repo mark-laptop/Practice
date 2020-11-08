@@ -27,7 +27,7 @@ public class UserView {
     public String firstName;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Фамилия не модет быть больше 50 символов")
+    @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Фамилия не может быть больше 50 символов")
     @ApiModelProperty(value = "Фамилия", example = "Иванов")
     public String secondName;
 
