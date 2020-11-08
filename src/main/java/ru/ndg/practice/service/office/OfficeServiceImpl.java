@@ -28,8 +28,8 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OfficeView> getAllOffices(Set<Integer> ids) {
-        List<Office> listOffices = officeDao.getAll(ids);
+    public List<OfficeView> getAllOffices(Set<Integer> orgId) {
+        List<Office> listOffices = officeDao.getAll(orgId);
         return mapperFacade.mapAsList(listOffices, OfficeView.class);
     }
 

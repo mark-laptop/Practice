@@ -28,8 +28,9 @@ class OrganizationController implements DefaultController {
 
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOrganizations(@RequestParam(name = "id", required = false) Set<Integer> ids) {
-        List<OrganizationView> listOrganization = organizationService.getAllOrganization(ids);
+    public ResponseEntity<Object> getAllOrganizations(
+            @RequestParam(name = "name", required = false) Set<String> nameSet) {
+        List<OrganizationView> listOrganization = organizationService.getAllOrganization(nameSet);
         return new ResponseEntity<>(putViewInBody("data", listOrganization), HttpStatus.OK);
     }
 

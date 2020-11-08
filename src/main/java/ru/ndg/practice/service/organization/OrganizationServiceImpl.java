@@ -28,8 +28,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationView> getAllOrganization(Set<Integer> ids) {
-        List<Organization> listOrganizations = organizationDao.getAll(ids);
+    public List<OrganizationView> getAllOrganization(Set<String> nameSet) {
+        List<Organization> listOrganizations = organizationDao.getAll(nameSet);
         return mapperFacade.mapAsList(listOrganizations, OrganizationView.class);
     }
 

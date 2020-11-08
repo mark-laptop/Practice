@@ -22,13 +22,13 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> getAll(Set<Integer> ids) {
+    public List<Office> getAll(Set<Integer> orgId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> officeCriteria = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = officeCriteria.from(Office.class);
         officeCriteria.select(officeRoot);
-        if (ids != null) {
-            officeCriteria.where(officeRoot.get("id").in(ids));
+        if (orgId != null) {
+            officeCriteria.where(officeRoot.get("organization").get("id").in(orgId));
         }
         return entityManager.createQuery(officeCriteria).getResultList();
     }

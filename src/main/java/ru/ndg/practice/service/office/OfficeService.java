@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface OfficeService {
 
-    List<OfficeView> getAllOffices(Set<Integer> ids);
+    List<OfficeView> getAllOffices(Set<Integer> orgId);
     OfficeView getOffice(Integer id);
     void saveOffice(@Validated(OfficeSave.class) OfficeView office);
     void updateOffice(@Validated(OfficeUpdate.class) OfficeView office);

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface UserDao {
 
-    List<User> getAll(Set<Integer> ids);
+    List<User> getAll(Set<Integer> officeId);
     User getById(Integer id);
     void save(User user);
     void update(User user);

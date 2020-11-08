@@ -28,8 +28,8 @@ class UserController implements DefaultController {
 
     @JsonView(value = {UserList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllUsers(@RequestParam(name = "id", required = false) Set<Integer> ids) {
-        List<UserView> allUsers = userService.getAllUsers(ids);
+    public ResponseEntity<Object> getAllUsers(@RequestParam(name = "officeId", required = false) Set<Integer> officeId) {
+        List<UserView> allUsers = userService.getAllUsers(officeId);
         return new ResponseEntity<>(putViewInBody("data", allUsers), HttpStatus.OK);
     }
 

@@ -24,13 +24,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll(Set<Integer> ids) {
+    public List<User> getAll(Set<Integer> officeId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> userCriteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = userCriteria.from(User.class);
         userCriteria.select(userRoot);
-        if (ids != null) {
-            userCriteria.where(userRoot.get("id").in(ids));
+        if (officeId != null) {
+            userCriteria.where(userRoot.get("office").get("id").in(officeId));
         }
         return entityManager.createQuery(userCriteria).getResultList();
     }

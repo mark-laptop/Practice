@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserView> getAllUsers(Set<Integer> ids) {
-        List<User> listUsers = userDao.getAll(ids);
+    public List<UserView> getAllUsers(Set<Integer> officeId) {
+        List<User> listUsers = userDao.getAll(officeId);
         return mapperFacade.mapAsList(listUsers, UserView.class);
     }
 

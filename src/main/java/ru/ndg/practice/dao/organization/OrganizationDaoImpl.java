@@ -22,13 +22,13 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getAll(Set<Integer> ids) {
+    public List<Organization> getAll(Set<String> nameSet) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> organizationCriteria = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = organizationCriteria.from(Organization.class);
         organizationCriteria.select(organizationRoot);
-        if (ids != null) {
-            organizationCriteria.where(organizationRoot.get("id").in(ids));
+        if (nameSet != null) {
+            organizationCriteria.where(organizationRoot.get("name").in(nameSet));
         }
         return entityManager.createQuery(organizationCriteria).getResultList();
     }

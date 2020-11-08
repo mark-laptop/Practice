@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface OrganizationService {
 
-    List<OrganizationView> getAllOrganization(Set<Integer> ids);
+    List<OrganizationView> getAllOrganization(Set<String> nameSet);
     OrganizationView getOrganization(Integer id);
     void saveOrganization(@Validated(OrganizationSave.class) OrganizationView organization);
     void updateOrganization(@Validated(OrganizationUpdate.class) OrganizationView organization);

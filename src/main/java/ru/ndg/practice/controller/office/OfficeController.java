@@ -28,8 +28,8 @@ class OfficeController implements DefaultController {
 
     @JsonView(value = {OfficeList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOffices(@RequestParam(name = "id", required = false) Set<Integer> ids) {
-        List<OfficeView> listOffices = officeService.getAllOffices(ids);
+    public ResponseEntity<Object> getAllOffices(@RequestParam(name = "orgId", required = false) Set<Integer> OrgId) {
+        List<OfficeView> listOffices = officeService.getAllOffices(OrgId);
         return new ResponseEntity<>(putViewInBody("data", listOffices), HttpStatus.OK);
     }
 

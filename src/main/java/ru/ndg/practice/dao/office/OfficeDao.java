@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface OfficeDao {
 
-    List<Office> getAll(Set<Integer> ids);
+    List<Office> getAll(Set<Integer> orgId);
     Office getById(Integer id);
     void save(Office office);
     void update(Office office);

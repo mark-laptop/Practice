@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface OrganizationDao {
 
-    List<Organization> getAll(Set<Integer> ids);
+    List<Organization> getAll(Set<String> nameSet);
     Organization getById(Integer id);
     void save(Organization organization);
     void update(Organization organization);
