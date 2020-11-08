@@ -3,6 +3,8 @@ package ru.ndg.practice.view;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import ru.ndg.practice.view.transfer.in.user.UserSave;
+import ru.ndg.practice.view.transfer.in.user.UserUpdate;
 import ru.ndg.practice.view.transfer.out.user.UserById;
 import ru.ndg.practice.view.transfer.out.user.UserList;
 
@@ -15,7 +17,7 @@ public class PositionView {
     public Integer id;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotEmpty
+    @NotEmpty(groups = {UserUpdate.class, UserSave.class})
     @ApiModelProperty(value = "Наименование", example = "Генеральный директор")
     public String name;
 }

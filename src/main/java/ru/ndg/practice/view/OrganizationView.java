@@ -32,13 +32,13 @@ public class OrganizationView {
 
     @JsonView(value = {OrganizationById.class})
     @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
-    @Size(min = 12, max = 12)
+    @Size(min = 12, max = 12, groups = {OrganizationUpdate.class, OrganizationSave.class})
     @ApiModelProperty(value = "ИНН", example = "123456789012")
     public String inn;
 
     @JsonView(value = {OrganizationById.class})
     @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class})
-    @Size(min = 9, max = 9)
+    @Size(min = 9, max = 9, groups = {OrganizationUpdate.class, OrganizationSave.class})
     @ApiModelProperty(value = "КПП", example = "123456789")
     public String kpp;
 
