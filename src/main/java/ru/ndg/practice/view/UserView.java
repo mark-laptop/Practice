@@ -50,15 +50,15 @@ public class UserView {
     @ApiModelProperty(value = "Должность", example = "Генеральный директор")
     public PositionView position;
 
-    @JsonView(value = {UserById.class, UserList.class})
+    @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Гражданство", example = "Российская федерация")
     public CitizenshipView citizenship;
 
-    @JsonView(value = {UserById.class, UserList.class})
+    @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Документ", example = "Паспорт гражданина Российской Федерации")
     public DocumentView document;
 
-    @JsonView(value = {UserList.class, UserById.class})
+    @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "", example = "Да")
     public Boolean isIdentified;
 }

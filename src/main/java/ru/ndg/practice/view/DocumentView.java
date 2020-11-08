@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import ru.ndg.practice.view.transfer.out.user.UserById;
-import ru.ndg.practice.view.transfer.out.user.UserList;
 
 import java.util.Date;
 
@@ -22,7 +21,7 @@ public class DocumentView {
     @ApiModelProperty(value = "Дата", example = "0001-01-01")
     public Date date;
 
-    @JsonView(value = {UserList.class, UserById.class})
+    @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Тип документа", example = "Паспорт гражданина Российской Федерации")
     public DocumentTypeView documentType;
 }
