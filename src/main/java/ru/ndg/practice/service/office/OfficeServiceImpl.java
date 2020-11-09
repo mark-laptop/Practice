@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.dao.office.OfficeDao;
+import ru.ndg.practice.dao.organization.OrganizationDao;
 import ru.ndg.practice.model.Office;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.OfficeView;
+import ru.ndg.practice.model.Organization;
 
 import java.util.List;
 
@@ -15,11 +17,13 @@ import java.util.List;
 public class OfficeServiceImpl implements OfficeService {
 
     private final OfficeDao officeDao;
+    private final OrganizationDao organizationDao;
     private final MapperFacade mapperFacade;
 
     @Autowired
-    public OfficeServiceImpl(OfficeDao officeDao, MapperFacade mapperFacade) {
+    public OfficeServiceImpl(OfficeDao officeDao, OrganizationDao organizationDao, MapperFacade mapperFacade) {
         this.officeDao = officeDao;
+        this.organizationDao = organizationDao;
         this.mapperFacade = mapperFacade;
     }
 
@@ -40,14 +44,16 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void saveOffice(OfficeView office) {
+        Organization organization = organizationDao.getById(office.orgId);
         Office officeEntity = mapperFacade.map(office, Office.class);
+        officeEntity.setOrganization(organization);
         officeDao.save(officeEntity);
     }
 
     @Override
     @Transactional
     public void updateOffice(OfficeView office) {
-        Office officeEntity = mapperFacade.map(office, Office.class);
-        officeDao.update(officeEntity);
+        Office officeEntity = officeDao.getById(office.id);
+        mapperFacade.map(office, officeEntity);
     }
 }

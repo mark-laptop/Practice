@@ -14,6 +14,7 @@ public class CustomMapperFactory implements FactoryBean<MapperFactory> {
     @Override
     public MapperFactory getObject() {
         return new DefaultMapperFactory.Builder()
+                .mapNulls(false)
                 .constructorResolverStrategy(null)
                 .build();
     }

@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS User
     version        INTEGER     NOT NULL COMMENT 'Служебное поле hibernate',
     office_id      INTEGER     NOT NULL COMMENT 'Внешний ключ на таблицу офис',
     first_name     VARCHAR(50) NOT NULL COMMENT 'Имя',
-    second_name    VARCHAR(50) NOT NULL COMMENT 'Фамилия',
+    second_name    VARCHAR(50) COMMENT 'Фамилия',
     middle_name    VARCHAR(50) COMMENT 'Отчество',
     phone          VARCHAR(11) COMMENT 'Телефон',
     position_id    INTEGER COMMENT 'Внешний ключ на таблицу должности',
