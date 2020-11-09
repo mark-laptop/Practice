@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS Document
     date             DATE DEFAULT NOW() NOT NULL COMMENT 'Дата',
     CONSTRAINT FK_Document_document_type_id FOREIGN KEY (document_type_id) REFERENCES Document_type (id)
 );
-CREATE INDEX IX_Document_number ON Document (number);
-CREATE INDEX IX_Document_date ON Document (date);
+CREATE INDEX IX_Document_number_date ON Document (number, date);
 CREATE INDEX IX_Document_document_type_id ON Document (document_type_id);
 
 COMMENT ON TABLE Document IS 'Таблица документов удостоверяющих личность';
