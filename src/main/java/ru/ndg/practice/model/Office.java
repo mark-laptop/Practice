@@ -31,7 +31,7 @@ public class Office {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
