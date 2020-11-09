@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DocumentDaoImpl implements DocumentDao {
@@ -50,6 +51,11 @@ public class DocumentDaoImpl implements DocumentDao {
         documentCriteria.select(documentRoot);
         documentCriteria.where(criteriaBuilder.equal(documentRoot.get("number"), number));
         return entityManager.createQuery(documentCriteria).getSingleResult();
+    }
+
+    @Override
+    public Document getByParam(Map<String, Object> params) {
+        return null;
     }
 
     @Override

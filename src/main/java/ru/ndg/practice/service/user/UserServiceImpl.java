@@ -13,7 +13,9 @@ import ru.ndg.practice.model.*;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.UserView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -99,6 +101,20 @@ public class UserServiceImpl implements UserService {
     }
 
     private Document getDocument(UserView userView) {
+        Map<String, Object> params = new HashMap<>();
+        if (userView.docNumber != null) {
+            params.put("docNumber", userView.docNumber);
+        }
+        if (userView.docDate != null) {
+            params.put("docDate", userView.docDate);
+        }
+        if (userView.docName != null) {
+            params.put("docName", userView.docName);
+        }
+        if (userView.docCode != null) {
+            params.put("docCode", userView.docCode);
+        }
+        documentDao.getByParam(params);
         return null;
     }
 }
