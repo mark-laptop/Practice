@@ -40,6 +40,16 @@ public class CitizenshipDaoImpl implements CitizenshipDao {
     }
 
     @Override
+    public Citizenship getByCode(Integer code) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Citizenship> citizenshipCriteria = criteriaBuilder.createQuery(Citizenship.class);
+        Root<Citizenship> citizenshipRoot = citizenshipCriteria.from(Citizenship.class);
+        citizenshipCriteria.select(citizenshipRoot);
+        citizenshipCriteria.where(criteriaBuilder.equal(citizenshipRoot.get("code"), code));
+        return entityManager.createQuery(citizenshipCriteria).getSingleResult();
+    }
+
+    @Override
     public void save(Citizenship citizenship) {
         entityManager.persist(citizenship);
     }

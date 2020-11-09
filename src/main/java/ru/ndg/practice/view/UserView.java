@@ -11,6 +11,7 @@ import ru.ndg.practice.view.transfer.out.user.UserList;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @ApiModel(value = "Сотрудник")
 public class UserView {
@@ -57,9 +58,24 @@ public class UserView {
     @ApiModelProperty(value = "Гражданство", example = "Российская федерация")
     public CitizenshipView citizenship;
 
+    @ApiModelProperty(value = "Код гражданства", example = "1")
+    public Integer citizenshipCode;
+
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Документ", example = "Паспорт гражданина Российской Федерации")
     public DocumentView document;
+
+    @ApiModelProperty(value = "Номер документа", example = "1234")
+    public String docNumber;
+
+    @ApiModelProperty(value = "Дата документа", example = "0001-01-01")
+    public Date docDate;
+
+    @ApiModelProperty(value = "Наименование документа", example = "Паспорт иностранного гражданина")
+    public String docName;
+
+    @ApiModelProperty(value = "Код документа", example = "10")
+    public Short docCode;
 
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "", example = "Да")
