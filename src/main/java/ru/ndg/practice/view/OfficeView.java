@@ -21,7 +21,7 @@ public class OfficeView {
     public Integer id;
 
     @JsonView(value = {OfficeList.class, OfficeById.class})
-    @NotNull(groups = {OfficeUpdate.class, OfficeSave.class}, message = "Наименование не должно быть пустым")
+    @NotNull(groups = {OfficeUpdate.class}, message = "Наименование не должно быть пустым")
     @ApiModelProperty(value = "Наименование", example = "Головной офис")
     public String name;
 

@@ -65,9 +65,9 @@ COMMENT ON TABLE Organization IS 'Организация';
 CREATE TABLE IF NOT EXISTS Office
 (
     id              INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version         INTEGER      NOT NULL COMMENT 'Служебное поле hibernate',
+    version         INTEGER NOT NULL COMMENT 'Служебное поле hibernate',
     organization_id INTEGER COMMENT 'Внешний ключ на таблицу организации',
-    name            VARCHAR(255) NOT NULL COMMENT 'Наименование',
+    name            VARCHAR(255) COMMENT 'Наименование',
     address         VARCHAR(255) COMMENT 'Адрес офиса',
     phone           VARCHAR(11) COMMENT 'Номер телефона',
     is_active       BOOL COMMENT 'Флаг использования',
