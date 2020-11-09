@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.ndg.practice.controller.ControllerUtils;
+import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.service.office.OfficeService;
 import ru.ndg.practice.view.OfficeView;
 import ru.ndg.practice.view.transfer.in.office.OfficeSave;

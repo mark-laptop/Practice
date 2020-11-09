@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.ndg.practice.controller.ControllerUtils;
+import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.service.citizenship.CitizenshipService;
 import ru.ndg.practice.service.document_type.DocumentTypeService;
 import ru.ndg.practice.view.CitizenshipView;

@@ -1,4 +1,4 @@
-package ru.ndg.practice.controller;
+package ru.ndg.practice.controller.util;
 
 
 import java.util.LinkedHashMap;
