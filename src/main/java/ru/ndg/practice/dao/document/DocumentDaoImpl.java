@@ -2,6 +2,7 @@ package ru.ndg.practice.dao.document;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.ndg.practice.dao.documet_type.DocumentTypeDao;
 import ru.ndg.practice.model.Document;
 
 import javax.persistence.EntityManager;
@@ -14,10 +15,12 @@ import java.util.List;
 public class DocumentDaoImpl implements DocumentDao {
 
     private final EntityManager entityManager;
+    private final DocumentTypeDao documentTypeDao;
 
     @Autowired
-    public DocumentDaoImpl(EntityManager entityManager) {
+    public DocumentDaoImpl(EntityManager entityManager, DocumentTypeDao documentTypeDao) {
         this.entityManager = entityManager;
+        this.documentTypeDao = documentTypeDao;
     }
 
     @Override

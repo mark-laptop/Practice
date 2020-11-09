@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.dao.citizenship.CitizenshipDao;
 import ru.ndg.practice.dao.document.DocumentDao;
-import ru.ndg.practice.dao.documet_type.DocumentTypeDao;
 import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.dao.position.PositionDao;
 import ru.ndg.practice.dao.user.UserDao;
@@ -24,7 +23,6 @@ public class UserServiceImpl implements UserService {
     private final PositionDao positionDao;
     private final CitizenshipDao citizenshipDao;
     private final DocumentDao documentDao;
-    private final DocumentTypeDao documentTypeDao;
     private final MapperFacade mapperFacade;
 
     @Autowired
@@ -33,14 +31,12 @@ public class UserServiceImpl implements UserService {
                            PositionDao positionDao,
                            CitizenshipDao citizenshipDao,
                            DocumentDao documentDao,
-                           DocumentTypeDao documentTypeDao,
                            MapperFacade mapperFacade) {
         this.userDao = userDao;
         this.officeDao = officeDao;
         this.positionDao = positionDao;
         this.citizenshipDao = citizenshipDao;
         this.documentDao = documentDao;
-        this.documentTypeDao = documentTypeDao;
         this.mapperFacade = mapperFacade;
     }
 
@@ -68,6 +64,10 @@ public class UserServiceImpl implements UserService {
             Citizenship citizenship = citizenshipDao.getByCode(user.citizenshipCode);
             userEntity.setCitizenship(citizenship);
         }
+        if (documentParamExist(user)) {
+            Document document = getDocument(user);
+            userEntity.setDocument(document);
+        }
         userEntity.setOffice(office);
         userEntity.setPosition(position);
         userDao.save(userEntity);
@@ -87,6 +87,18 @@ public class UserServiceImpl implements UserService {
             Citizenship citizenship = citizenshipDao.getByCode(user.citizenshipCode);
             userEntity.setCitizenship(citizenship);
         }
+        if (documentParamExist(user)) {
+            Document document = getDocument(user);
+            userEntity.setDocument(document);
+        }
         userEntity.setPosition(position);
+    }
+
+    private boolean documentParamExist(UserView userView) {
+        return userView.docNumber != null || userView.docDate != null || userView.docCode != null || userView.docName != null;
+    }
+
+    private Document getDocument(UserView userView) {
+        return null;
     }
 }
