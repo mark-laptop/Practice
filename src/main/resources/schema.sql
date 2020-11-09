@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS Organization
     id        INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version   INTEGER            NOT NULL COMMENT 'Служебное поле hibernate',
     name      VARCHAR(255)       NOT NULL COMMENT 'Краткое наименование',
-    full_name VARCHAR(255) COMMENT 'Полное наименование',
+    full_name VARCHAR(255)       NOT NULL COMMENT 'Полное наименование',
     inn       VARCHAR(12) UNIQUE NOT NULL COMMENT 'ИНН',
     kpp       VARCHAR(9)         NOT NULL COMMENT 'КПП',
-    address   VARCHAR(255) COMMENT 'Адрес организации',
+    address   VARCHAR(255)       NOT NULL COMMENT 'Адрес организации',
     phone     VARCHAR(11) COMMENT 'Номер телефона',
     is_active BOOL COMMENT 'Флаг использования'
 );
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS User
     second_name    VARCHAR(50) COMMENT 'Фамилия',
     middle_name    VARCHAR(50) COMMENT 'Отчество',
     phone          VARCHAR(11) COMMENT 'Телефон',
-    position_id    INTEGER COMMENT 'Внешний ключ на таблицу должности',
+    position_id    INTEGER     NOT NULL COMMENT 'Внешний ключ на таблицу должности',
     document_id    INTEGER UNIQUE COMMENT 'Внешний ключ на таблицу документов',
     citizenship_id INTEGER COMMENT 'Внешний ключ на таблицу гражданства',
     is_identified  BOOL COMMENT 'Флаг идентифицирован',
