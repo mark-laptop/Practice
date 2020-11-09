@@ -44,7 +44,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", errors), status);
+        return new ResponseEntity<>(ControllerUtils.putViewInBody("error",
+                (errors.size() == 1) ? errors.get(0) : errors), status);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
