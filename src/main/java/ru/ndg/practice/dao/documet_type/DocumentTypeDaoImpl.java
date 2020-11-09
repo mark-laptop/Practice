@@ -40,6 +40,26 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     @Override
+    public DocumentType getByName(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DocumentType> documentTypeCriteria = criteriaBuilder.createQuery(DocumentType.class);
+        Root<DocumentType> documentTypeRoot = documentTypeCriteria.from(DocumentType.class);
+        documentTypeCriteria.select(documentTypeRoot);
+        documentTypeCriteria.where(criteriaBuilder.equal(documentTypeRoot.get("name"), name));
+        return entityManager.createQuery(documentTypeCriteria).getSingleResult();
+    }
+
+    @Override
+    public DocumentType getByCode(Short code) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DocumentType> documentTypeCriteria = criteriaBuilder.createQuery(DocumentType.class);
+        Root<DocumentType> documentTypeRoot = documentTypeCriteria.from(DocumentType.class);
+        documentTypeCriteria.select(documentTypeRoot);
+        documentTypeCriteria.where(criteriaBuilder.equal(documentTypeRoot.get("code"), code));
+        return entityManager.createQuery(documentTypeCriteria).getSingleResult();
+    }
+
+    @Override
     public void save(DocumentType documentType) {
         entityManager.persist(documentType);
     }

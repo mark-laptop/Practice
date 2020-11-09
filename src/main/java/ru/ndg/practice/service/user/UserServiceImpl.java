@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.dao.citizenship.CitizenshipDao;
 import ru.ndg.practice.dao.document.DocumentDao;
+import ru.ndg.practice.dao.documet_type.DocumentTypeDao;
 import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.dao.position.PositionDao;
 import ru.ndg.practice.dao.user.UserDao;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final PositionDao positionDao;
     private final CitizenshipDao citizenshipDao;
     private final DocumentDao documentDao;
+    private final DocumentTypeDao documentTypeDao;
     private final MapperFacade mapperFacade;
 
     @Autowired
@@ -31,12 +33,14 @@ public class UserServiceImpl implements UserService {
                            PositionDao positionDao,
                            CitizenshipDao citizenshipDao,
                            DocumentDao documentDao,
+                           DocumentTypeDao documentTypeDao,
                            MapperFacade mapperFacade) {
         this.userDao = userDao;
         this.officeDao = officeDao;
         this.positionDao = positionDao;
         this.citizenshipDao = citizenshipDao;
         this.documentDao = documentDao;
+        this.documentTypeDao = documentTypeDao;
         this.mapperFacade = mapperFacade;
     }
 

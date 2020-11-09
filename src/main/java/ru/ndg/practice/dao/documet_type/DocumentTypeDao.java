@@ -8,6 +8,8 @@ public interface DocumentTypeDao {
 
     List<DocumentType> getAll();
     DocumentType getById(Integer id);
+    DocumentType getByName(String name);
+    DocumentType getByCode(Short code);
     void save(DocumentType documentType);
     void update(DocumentType documentType);
 }
