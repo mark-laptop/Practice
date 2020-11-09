@@ -1,4 +1,4 @@
-package ru.ndg.practice.controller;
+package ru.ndg.practice.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import ru.ndg.practice.controller.ControllerUtils;
 
 import java.util.List;
 import java.util.Objects;
