@@ -41,14 +41,17 @@ public class UserView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;
 
-    @NotNull(groups = {UserSave.class}, message = "Офис не может быть пустым")
-    @ApiModelProperty(value = "Офис", example = "Головной офис")
-    public OfficeView office;
+    @NotNull(groups = {UserSave.class}, message = "id офиса не может быть пустым")
+    @ApiModelProperty(value = "id офиса", example = "1")
+    public Integer officeId;
 
     @JsonView(value = {UserList.class, UserById.class})
-    @NotNull(groups = {UserUpdate.class, UserSave.class}, message = "Должность не может быть пустой")
     @ApiModelProperty(value = "Должность", example = "Генеральный директор")
     public PositionView position;
+
+    @NotNull(groups = {UserUpdate.class, UserSave.class}, message = "id должности не может быть пустым")
+    @ApiModelProperty(value = "id должности", example = "1")
+    public Integer positionId;
 
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Гражданство", example = "Российская федерация")

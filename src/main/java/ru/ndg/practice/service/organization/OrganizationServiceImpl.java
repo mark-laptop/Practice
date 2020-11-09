@@ -47,7 +47,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void updateOrganization(OrganizationView organization) {
-        Organization organizationEntity = mapperFacade.map(organization, Organization.class);
-        organizationDao.update(organizationEntity);
+        Organization organizationEntity = organizationDao.getById(organization.id);
+        mapperFacade.map(organization, organizationEntity);
     }
 }

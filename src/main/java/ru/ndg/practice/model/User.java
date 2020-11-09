@@ -25,7 +25,7 @@ public class User {
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
-    @Column(name = "second_name", length = 50, nullable = false)
+    @Column(name = "second_name", length = 50)
     private String secondName;
 
     @Column(name = "middle_name", length = 50)

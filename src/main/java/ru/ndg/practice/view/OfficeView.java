@@ -30,10 +30,6 @@ public class OfficeView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     public String phone;
 
-    @NotNull(groups = {OfficeSave.class}, message = "Организация должна быть заполнена")
-    @ApiModelProperty(value = "Организация", example = "ООО Ромашка")
-    public OrganizationView organization;
-
     @JsonView(value = {OfficeById.class})
     @NotEmpty(groups = {OfficeUpdate.class}, message = "Адрес должен быть заполнен")
     @ApiModelProperty(value = "Адрес", example = "ул. Ленина 2")
@@ -42,4 +38,8 @@ public class OfficeView {
     @JsonView(value = {OfficeList.class, OfficeById.class})
     @ApiModelProperty(value = "Действующий", example = "Да")
     public Boolean isActive;
+
+    @NotNull(groups = {OfficeSave.class}, message = "id организации должно быть заполнено")
+    @ApiModelProperty(value = "id организации", example = "1")
+    public Integer orgId;
 }
