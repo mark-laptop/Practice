@@ -28,7 +28,7 @@ public class OfficeDaoImpl implements OfficeDao {
         CriteriaQuery<Office> officeCriteria = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = officeCriteria.from(Office.class);
         officeCriteria.select(officeRoot);
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, List<String>> param : params.entrySet()) {
                 officeCriteria.where(officeRoot.get(param.getKey()).in(param.getValue()));
             }

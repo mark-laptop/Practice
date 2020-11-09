@@ -28,7 +28,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         CriteriaQuery<Organization> organizationCriteria = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = organizationCriteria.from(Organization.class);
         organizationCriteria.select(organizationRoot);
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, List<String>> param : params.entrySet()) {
                 organizationCriteria.where(organizationRoot.get(param.getKey()).in(param.getValue()));
             }

@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
         CriteriaQuery<User> userCriteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = userCriteria.from(User.class);
         userCriteria.select(userRoot);
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, List<String>> param : params.entrySet()) {
                 userCriteria.where(userRoot.get(param.getKey()).in(param.getValue()));
             }
