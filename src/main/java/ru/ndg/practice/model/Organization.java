@@ -38,7 +38,7 @@ public class Organization {
     private String phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @Column(name = "address")
     private String address;
