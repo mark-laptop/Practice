@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DocumentTypeDaoImpl implements DocumentTypeDao {
@@ -56,6 +57,17 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         Root<DocumentType> documentTypeRoot = documentTypeCriteria.from(DocumentType.class);
         documentTypeCriteria.select(documentTypeRoot);
         documentTypeCriteria.where(criteriaBuilder.equal(documentTypeRoot.get("code"), code));
+        return entityManager.createQuery(documentTypeCriteria).getSingleResult();
+    }
+
+    @Override
+    public DocumentType getByNameAndCode(Map<String, Object> params) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<DocumentType> documentTypeCriteria = criteriaBuilder.createQuery(DocumentType.class);
+        Root<DocumentType> documentTypeRoot = documentTypeCriteria.from(DocumentType.class);
+        documentTypeCriteria.select(documentTypeRoot);
+        documentTypeCriteria.where(criteriaBuilder.equal(documentTypeRoot.get("code"), params.get("docCode")));
+        documentTypeCriteria.where(criteriaBuilder.equal(documentTypeRoot.get("name"), params.get("docName")));
         return entityManager.createQuery(documentTypeCriteria).getSingleResult();
     }
 

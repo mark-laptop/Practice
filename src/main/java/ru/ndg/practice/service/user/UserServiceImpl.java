@@ -114,7 +114,6 @@ public class UserServiceImpl implements UserService {
         if (userView.docCode != null) {
             params.put("docCode", userView.docCode);
         }
-        documentDao.getByParam(params);
-        return null;
+        return documentDao.getByParam(params);
     }
 }

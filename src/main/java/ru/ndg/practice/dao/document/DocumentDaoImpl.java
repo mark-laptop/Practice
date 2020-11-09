@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.ndg.practice.dao.documet_type.DocumentTypeDao;
 import ru.ndg.practice.model.Document;
+import ru.ndg.practice.model.DocumentType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -55,7 +56,17 @@ public class DocumentDaoImpl implements DocumentDao {
 
     @Override
     public Document getByParam(Map<String, Object> params) {
-        return null;
+        if (params == null || params.isEmpty()) throw new IllegalArgumentException("param not be null or empty");
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Document> documentCriteria = criteriaBuilder.createQuery(Document.class);
+        Root<Document> documentRoot = documentCriteria.from(Document.class);
+        documentCriteria.select(documentRoot);
+        documentCriteria.where(criteriaBuilder.equal(documentRoot.get("number"), params.get("docNumber")));
+        documentCriteria.where(criteriaBuilder.equal(documentRoot.get("date"), params.get("docDate")));
+        Document document = entityManager.createQuery(documentCriteria).getSingleResult();
+        DocumentType documentType = documentTypeDao.getByNameAndCode(params);
+        document.setDocumentType(documentType);
+        return document;
     }
 
     @Override
