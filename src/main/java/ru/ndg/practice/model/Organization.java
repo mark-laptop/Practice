@@ -28,7 +28,7 @@ public class Organization {
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "inn", length = 12, nullable = false, unique = true)
+    @Column(name = "inn", length = 12, nullable = false)
     private String inn;
 
     @Column(name = "kpp", length = 9, nullable = false)
