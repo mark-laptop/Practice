@@ -14,9 +14,7 @@ import ru.ndg.practice.Application;
 import ru.ndg.practice.service.organization.OrganizationService;
 import ru.ndg.practice.view.OrganizationView;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
