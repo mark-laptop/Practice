@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Document
     document_type_id INTEGER            NOT NULL COMMENT 'Внешний ключ на таблицу типов документов',
     number           VARCHAR(20)        NOT NULL COMMENT 'Номер',
     date             DATE DEFAULT NOW() NOT NULL COMMENT 'Дата',
-    CONSTRAINT FK_Document_document_type_id FOREIGN KEY (document_type_id) REFERENCES Document_type (id)
+    FOREIGN KEY (document_type_id) REFERENCES Document_type (id)
 );
 CREATE INDEX IX_Document_number_date ON Document (number, date);
 CREATE INDEX IX_Document_document_type_id ON Document (document_type_id);
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Office
     address         VARCHAR(255) COMMENT 'Адрес офиса',
     phone           VARCHAR(11) COMMENT 'Номер телефона',
     is_active       BOOL COMMENT 'Флаг использования',
-    CONSTRAINT FK_Office_organization_id FOREIGN KEY (organization_id) REFERENCES Organization (id)
+    FOREIGN KEY (organization_id) REFERENCES Organization (id)
 );
 CREATE INDEX IX_Office_name ON Office (name);
 CREATE INDEX IX_Office_phone ON Office (phone);
@@ -106,9 +106,9 @@ CREATE TABLE IF NOT EXISTS User
     document_id    INTEGER UNIQUE COMMENT 'Внешний ключ на таблицу документов',
     citizenship_id INTEGER COMMENT 'Внешний ключ на таблицу гражданства',
     is_identified  BOOL COMMENT 'Флаг идентифицирован',
-    CONSTRAINT FK_User_position_id FOREIGN KEY (position_id) REFERENCES Position (id),
-    CONSTRAINT FK_User_citizenship_id FOREIGN KEY (citizenship_id) REFERENCES Citizenship (id),
-    CONSTRAINT FK_User_document_id FOREIGN KEY (document_id) REFERENCES Document (id)
+    FOREIGN KEY (position_id) REFERENCES Position (id),
+    FOREIGN KEY (citizenship_id) REFERENCES Citizenship (id),
+    FOREIGN KEY (document_id) REFERENCES Document (id)
 );
 CREATE INDEX IX_User_first_name ON User (first_name);
 CREATE INDEX IX_User_second_name ON User (second_name);
