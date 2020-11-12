@@ -9,7 +9,11 @@ import ru.ndg.practice.dao.document.DocumentDao;
 import ru.ndg.practice.dao.office.OfficeDao;
 import ru.ndg.practice.dao.position.PositionDao;
 import ru.ndg.practice.dao.user.UserDao;
-import ru.ndg.practice.model.*;
+import ru.ndg.practice.model.Citizenship;
+import ru.ndg.practice.model.Document;
+import ru.ndg.practice.model.Office;
+import ru.ndg.practice.model.Position;
+import ru.ndg.practice.model.User;
 import ru.ndg.practice.model.mapper.MapperFacade;
 import ru.ndg.practice.view.UserView;
 
