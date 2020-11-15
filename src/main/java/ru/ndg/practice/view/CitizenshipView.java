@@ -18,5 +18,5 @@ public class CitizenshipView {
 
     @JsonView(value = {UserById.class, CitizenshipCountries.class})
     @ApiModelProperty(value = "Код", example = "643")
-    public Integer code;
+    public String code;
 }

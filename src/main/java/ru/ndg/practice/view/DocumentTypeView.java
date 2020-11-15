@@ -18,5 +18,5 @@ public class DocumentTypeView {
 
     @JsonView(value = {DocumentTypeDocs.class})
     @ApiModelProperty(value = "Код", example = "21")
-    public Short code;
+    public String code;
 }

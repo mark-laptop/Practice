@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Citizenship
     id      INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version INTEGER             NOT NULL COMMENT 'Служебное поле hibernate',
     name    VARCHAR(255) UNIQUE NOT NULL COMMENT 'Наименование',
-    code    INTEGER UNIQUE      NOT NULL COMMENT 'Код' // varchar
+    code    VARCHAR(255) UNIQUE NOT NULL COMMENT 'Код'
 );
 CREATE INDEX IX_Citizenship_code ON Citizenship (code);
 CREATE UNIQUE INDEX IX_Citizenship_name ON Citizenship (name);
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Document_type
     id      INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version INTEGER             NOT NULL COMMENT 'Служебное поле hibernate',
     name    VARCHAR(255) UNIQUE NOT NULL COMMENT 'Наименование',
-    code    SMALLINT UNIQUE     NOT NULL COMMENT 'Код' // varchar
+    code    VARCHAR(255) UNIQUE NOT NULL COMMENT 'Код'
 );
 CREATE UNIQUE INDEX IX_Document_type_name ON Document_type (name);
 CREATE INDEX IX_Document_type_code ON Document_type (code);
@@ -29,10 +29,10 @@ COMMENT ON TABLE Document_type IS 'Таблица типов документо�
 CREATE TABLE IF NOT EXISTS Document
 (
     id               INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version          INTEGER            NOT NULL COMMENT 'Служебное поле hibernate',
-    document_type_id INTEGER            NOT NULL COMMENT 'Внешний ключ на таблицу типов документов',
-    number           VARCHAR(20)        NOT NULL COMMENT 'Номер',
-    date             DATE DEFAULT NOW() NOT NULL COMMENT 'Дата', // varchar
+    version          INTEGER      NOT NULL COMMENT 'Служебное поле hibernate',
+    document_type_id INTEGER      NOT NULL COMMENT 'Внешний ключ на таблицу типов документов',
+    number           VARCHAR(20)  NOT NULL COMMENT 'Номер',
+    date             VARCHAR(255) NOT NULL COMMENT 'Дата',
     FOREIGN KEY (document_type_id) REFERENCES Document_type (id)
 );
 CREATE INDEX IX_Document_number_date ON Document (number, date);

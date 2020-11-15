@@ -34,7 +34,7 @@ public class DocumentType {
     private String name;
 
     @Column(name = "code", nullable = false, unique = true)
-    private Short code;
+    private String code;
 
     @Override
     public boolean equals(Object o) {

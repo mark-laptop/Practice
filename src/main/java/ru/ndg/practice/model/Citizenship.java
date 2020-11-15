@@ -34,7 +34,7 @@ public class Citizenship {
     private String name;
 
     @Column(name = "code", nullable = false, unique = true)
-    private Integer code;
+    private String code;
 
     @Override
     public boolean equals(Object o) {

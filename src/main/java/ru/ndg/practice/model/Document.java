@@ -14,10 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity(name = "Document")
@@ -40,8 +37,7 @@ public class Document {
     private String number;
 
     @Column(name = "date", nullable = false)
-    @Temporal(value = TemporalType.DATE)
-    private Date date;
+    private String date;
 
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "document_type_id")
