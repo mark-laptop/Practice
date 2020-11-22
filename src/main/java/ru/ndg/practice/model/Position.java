@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import java.util.Objects;
 
 @Entity(name = "Position")
 @Table(name = "Position")
@@ -32,22 +31,4 @@ public class Position {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Position position = (Position) o;
-
-        if (!Objects.equals(id, position.id)) return false;
-        return Objects.equals(name, position.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 }

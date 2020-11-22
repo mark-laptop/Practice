@@ -2,9 +2,7 @@ package ru.ndg.practice.controller.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.service.user.UserService;
 import ru.ndg.practice.view.UserView;
 import ru.ndg.practice.view.transfer.in.user.UserSave;
@@ -37,27 +34,23 @@ class UserController {
 
     @JsonView(value = {UserList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllUsers(@RequestParam(required = false) MultiValueMap<String, String> params) {
-        List<UserView> allUsers = userService.getAllUsers(params);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", allUsers), HttpStatus.OK);
+    public List<UserView> getAllUsers(@RequestParam(required = false) MultiValueMap<String, String> params) {
+        return userService.getAllUsers(params);
     }
 
     @JsonView(value = {UserById.class})
     @GetMapping(value = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getUserById(@PathVariable(name = "id") Integer id) {
-        UserView user = userService.getUser(id);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", user), HttpStatus.OK);
+    public UserView getUserById(@PathVariable(name = "id") Integer id) {
+        return userService.getUser(id);
     }
 
     @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateUser(@RequestBody @Validated(UserUpdate.class) UserView userView) {
+    public void updateUser(@RequestBody @Validated(UserUpdate.class) UserView userView) {
         userService.updateUser(userView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveUser(@RequestBody @Validated(UserSave.class) UserView userView) {
+    public void saveUser(@RequestBody @Validated(UserSave.class) UserView userView) {
         userService.saveUser(userView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }
 }

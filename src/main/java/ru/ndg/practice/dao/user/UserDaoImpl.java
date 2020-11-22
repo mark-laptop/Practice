@@ -6,6 +6,7 @@ import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.model.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
