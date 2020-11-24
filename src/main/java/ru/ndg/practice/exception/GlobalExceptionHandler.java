@@ -12,41 +12,49 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.ndg.practice.controller.util.ControllerUtils;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> exceptionHandler(Exception ex, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), status);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), status);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), status);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), status);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
                                                                       WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), status);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), status);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("error", ex.getMessage()), status);
+        return new ResponseEntity<>(putViewInBody(ex.getMessage()), status);
+    }
+
+    private Map<String, Object> putViewInBody(Object view) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("error", view);
+        return body;
     }
 }
