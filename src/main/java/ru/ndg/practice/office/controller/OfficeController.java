@@ -44,12 +44,12 @@ class OfficeController {
         return officeService.getOffice(id);
     }
 
-    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateOffice(@RequestBody @Validated(OfficeUpdate.class) OfficeView officeView) {
         officeService.updateOffice(officeView);
     }
 
-    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveOffice(@RequestBody @Validated(OfficeSave.class) OfficeView officeView) {
         officeService.saveOffice(officeView);
     }

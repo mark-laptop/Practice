@@ -44,12 +44,12 @@ class OrganizationController {
         return organizationService.getOrganization(id);
     }
 
-    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateOrganization(@RequestBody @Validated(OrganizationUpdate.class) OrganizationView organizationView) {
         organizationService.updateOrganization(organizationView);
     }
 
-    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveOrganization(@RequestBody @Validated(OrganizationSave.class) OrganizationView organizationView) {
         organizationService.saveOrganization(organizationView);
     }

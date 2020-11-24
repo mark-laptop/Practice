@@ -44,12 +44,12 @@ class UserController {
         return userService.getUser(id);
     }
 
-    @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateUser(@RequestBody @Validated(UserUpdate.class) UserView userView) {
         userService.updateUser(userView);
     }
 
-    @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveUser(@RequestBody @Validated(UserSave.class) UserView userView) {
         userService.saveUser(userView);
     }
