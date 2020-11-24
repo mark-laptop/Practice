@@ -37,27 +37,23 @@ class OrganizationController {
 
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOrganizations(@RequestParam(required = false) MultiValueMap<String, String> params) {
-        List<OrganizationView> listOrganization = organizationService.getAllOrganization(params);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", listOrganization), HttpStatus.OK);
+    public List<OrganizationView> getAllOrganizations(@RequestParam(required = false) MultiValueMap<String, String> params) {
+        return organizationService.getAllOrganization(params);
     }
 
     @JsonView(value = {OrganizationById.class})
     @GetMapping(value = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getOrganizationById(@PathVariable(name = "id") Integer id) {
-        OrganizationView organization = organizationService.getOrganization(id);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", organization), HttpStatus.OK);
+    public OrganizationView getOrganizationById(@PathVariable(name = "id") Integer id) {
+        return organizationService.getOrganization(id);
     }
 
     @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateOrganization(@RequestBody @Validated(OrganizationUpdate.class) OrganizationView organizationView) {
+    public void updateOrganization(@RequestBody @Validated(OrganizationUpdate.class) OrganizationView organizationView) {
         organizationService.updateOrganization(organizationView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveOrganization(@RequestBody @Validated(OrganizationSave.class) OrganizationView organizationView) {
+    public void saveOrganization(@RequestBody @Validated(OrganizationSave.class) OrganizationView organizationView) {
         organizationService.saveOrganization(organizationView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }
 }

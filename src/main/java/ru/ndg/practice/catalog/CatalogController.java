@@ -1,18 +1,15 @@
-package ru.ndg.practice.controller.catalog;
+package ru.ndg.practice.catalog;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.citizenship.service.CitizenshipService;
-import ru.ndg.practice.documenttype.service.DocumentTypeService;
 import ru.ndg.practice.citizenship.view.CitizenshipView;
-import ru.ndg.practice.documenttype.view.DocumentTypeView;
 import ru.ndg.practice.citizenship.view.transfer.CitizenshipCountries;
+import ru.ndg.practice.documenttype.service.DocumentTypeService;
+import ru.ndg.practice.documenttype.view.DocumentTypeView;
 import ru.ndg.practice.documenttype.view.transfer.DocumentTypeDocs;
 
 import java.util.List;
@@ -32,15 +29,13 @@ public class CatalogController {
 
     @JsonView(value = {DocumentTypeDocs.class})
     @GetMapping(value = {"/docs"})
-    public ResponseEntity<Object> getAllDocuments() {
-        List<DocumentTypeView> allDocumentTypes = documentTypeService.getAllDocumentTypes();
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("docs", allDocumentTypes), HttpStatus.OK);
+    public List<DocumentTypeView> getAllDocuments() {
+        return documentTypeService.getAllDocumentTypes();
     }
 
     @JsonView(value = {CitizenshipCountries.class})
     @GetMapping(value = {"/countries"})
-    public ResponseEntity<Object> getDocumentById() {
-        List<CitizenshipView> allCitizenship = citizenshipService.getAllCitizenship();
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("countries", allCitizenship), HttpStatus.OK);
+    public List<CitizenshipView> getDocumentById() {
+        return citizenshipService.getAllCitizenship();
     }
 }

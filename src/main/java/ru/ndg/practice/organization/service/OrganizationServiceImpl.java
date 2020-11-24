@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.organization.dao.OrganizationDao;
 import ru.ndg.practice.organization.model.Organization;
-import ru.ndg.practice.config.mapper.MapperFacade;
+import ru.ndg.practice.mapper.MapperFacade;
 import ru.ndg.practice.organization.view.OrganizationView;
 
 import java.util.List;

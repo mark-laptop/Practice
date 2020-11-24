@@ -1,4 +1,4 @@
-package ru.ndg.practice.config.mapper;
+package ru.ndg.practice.mapper;
 
 import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;

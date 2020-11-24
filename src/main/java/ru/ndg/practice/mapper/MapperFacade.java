@@ -1,4 +1,4 @@
-package ru.ndg.practice.config.mapper;
+package ru.ndg.practice.mapper;
 
 import java.util.List;
 

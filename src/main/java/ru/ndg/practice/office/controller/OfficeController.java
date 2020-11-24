@@ -37,27 +37,23 @@ class OfficeController {
 
     @JsonView(value = {OfficeList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllOffices(@RequestParam(required = false) MultiValueMap<String, String> params) {
-        List<OfficeView> listOffices = officeService.getAllOffices(params);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", listOffices), HttpStatus.OK);
+    public List<OfficeView> getAllOffices(@RequestParam(required = false) MultiValueMap<String, String> params) {
+        return officeService.getAllOffices(params);
     }
 
     @JsonView(value = {OfficeById.class})
     @GetMapping(value = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getOfficeById(@PathVariable(name = "id") Integer id) {
-        OfficeView office = officeService.getOffice(id);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("data", office), HttpStatus.OK);
+    public OfficeView getOfficeById(@PathVariable(name = "id") Integer id) {
+        return officeService.getOffice(id);
     }
 
     @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateOffice(@RequestBody @Validated(OfficeUpdate.class) OfficeView officeView) {
+    public void updateOffice(@RequestBody @Validated(OfficeUpdate.class) OfficeView officeView) {
         officeService.updateOffice(officeView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> saveOffice(@RequestBody @Validated(OfficeSave.class) OfficeView officeView) {
+    public void saveOffice(@RequestBody @Validated(OfficeSave.class) OfficeView officeView) {
         officeService.saveOffice(officeView);
-        return new ResponseEntity<>(ControllerUtils.putViewInBody("result", "success"), HttpStatus.CREATED);
     }
 }

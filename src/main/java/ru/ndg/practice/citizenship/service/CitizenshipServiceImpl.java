@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ndg.practice.citizenship.dao.CitizenshipDao;
 import ru.ndg.practice.citizenship.model.Citizenship;
-import ru.ndg.practice.config.mapper.MapperFacade;
+import ru.ndg.practice.mapper.MapperFacade;
 import ru.ndg.practice.citizenship.view.CitizenshipView;
 
 import java.util.List;
