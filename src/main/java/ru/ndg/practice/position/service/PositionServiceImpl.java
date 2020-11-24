@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ndg.practice.position.dao.PositionDao;
 import ru.ndg.practice.position.model.Position;
-import ru.ndg.practice.mapper.MapperFacade;
+import ru.ndg.practice.common.mapper.MapperFacade;
 import ru.ndg.practice.position.view.PositionView;
 
 import java.util.List;

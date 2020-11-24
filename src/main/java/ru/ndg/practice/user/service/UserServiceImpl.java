@@ -14,7 +14,7 @@ import ru.ndg.practice.document.model.Document;
 import ru.ndg.practice.office.model.Office;
 import ru.ndg.practice.position.model.Position;
 import ru.ndg.practice.user.model.User;
-import ru.ndg.practice.mapper.MapperFacade;
+import ru.ndg.practice.common.mapper.MapperFacade;
 import ru.ndg.practice.user.view.UserView;
 
 import java.util.HashMap;

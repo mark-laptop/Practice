@@ -1,4 +1,4 @@
-package ru.ndg.practice.config;
+package ru.ndg.practice.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package ru.ndg.practice.mapper;
+package ru.ndg.practice.common.mapper;
 
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;

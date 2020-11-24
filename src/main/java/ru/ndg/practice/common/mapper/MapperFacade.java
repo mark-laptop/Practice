@@ -1,4 +1,4 @@
-package ru.ndg.practice.mapper;
+package ru.ndg.practice.common.mapper;
 
 import java.util.List;
 

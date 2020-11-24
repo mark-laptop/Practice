@@ -1,4 +1,4 @@
-package ru.ndg.practice.controller;
+package ru.ndg.practice.common.controller;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

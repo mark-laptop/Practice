@@ -7,7 +7,7 @@ import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.office.dao.OfficeDao;
 import ru.ndg.practice.organization.dao.OrganizationDao;
 import ru.ndg.practice.office.model.Office;
-import ru.ndg.practice.mapper.MapperFacade;
+import ru.ndg.practice.common.mapper.MapperFacade;
 import ru.ndg.practice.office.view.OfficeView;
 import ru.ndg.practice.organization.model.Organization;
 
