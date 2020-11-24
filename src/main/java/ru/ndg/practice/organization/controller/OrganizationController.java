@@ -2,9 +2,7 @@ package ru.ndg.practice.organization.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.organization.service.OrganizationService;
 import ru.ndg.practice.organization.view.OrganizationView;
-import ru.ndg.practice.organization.view.transfer.OrganizationSave;
-import ru.ndg.practice.organization.view.transfer.OrganizationUpdate;
 import ru.ndg.practice.organization.view.transfer.OrganizationById;
 import ru.ndg.practice.organization.view.transfer.OrganizationList;
+import ru.ndg.practice.organization.view.transfer.OrganizationSave;
+import ru.ndg.practice.organization.view.transfer.OrganizationUpdate;
 
 import java.util.List;
 
@@ -47,12 +44,12 @@ class OrganizationController {
         return organizationService.getOrganization(id);
     }
 
-    @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateOrganization(@RequestBody @Validated(OrganizationUpdate.class) OrganizationView organizationView) {
         organizationService.updateOrganization(organizationView);
     }
 
-    @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public void saveOrganization(@RequestBody @Validated(OrganizationSave.class) OrganizationView organizationView) {
         organizationService.saveOrganization(organizationView);
     }

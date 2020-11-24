@@ -2,9 +2,7 @@ package ru.ndg.practice.office.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ndg.practice.controller.util.ControllerUtils;
 import ru.ndg.practice.office.service.OfficeService;
 import ru.ndg.practice.office.view.OfficeView;
-import ru.ndg.practice.office.view.transfer.OfficeSave;
-import ru.ndg.practice.office.view.transfer.OfficeUpdate;
 import ru.ndg.practice.office.view.transfer.OfficeById;
 import ru.ndg.practice.office.view.transfer.OfficeList;
+import ru.ndg.practice.office.view.transfer.OfficeSave;
+import ru.ndg.practice.office.view.transfer.OfficeUpdate;
 
 import java.util.List;
 
@@ -47,12 +44,12 @@ class OfficeController {
         return officeService.getOffice(id);
     }
 
-    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateOffice(@RequestBody @Validated(OfficeUpdate.class) OfficeView officeView) {
         officeService.updateOffice(officeView);
     }
 
-    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public void saveOffice(@RequestBody @Validated(OfficeSave.class) OfficeView officeView) {
         officeService.saveOffice(officeView);
     }

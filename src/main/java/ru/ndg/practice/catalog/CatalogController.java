@@ -2,6 +2,7 @@ package ru.ndg.practice.catalog;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,13 +29,13 @@ public class CatalogController {
     }
 
     @JsonView(value = {DocumentTypeDocs.class})
-    @GetMapping(value = {"/docs"})
+    @GetMapping(value = {"/docs"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DocumentTypeView> getAllDocuments() {
         return documentTypeService.getAllDocumentTypes();
     }
 
     @JsonView(value = {CitizenshipCountries.class})
-    @GetMapping(value = {"/countries"})
+    @GetMapping(value = {"/countries"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CitizenshipView> getDocumentById() {
         return citizenshipService.getAllCitizenship();
     }

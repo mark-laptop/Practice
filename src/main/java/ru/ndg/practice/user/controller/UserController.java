@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ndg.practice.user.service.UserService;
 import ru.ndg.practice.user.view.UserView;
-import ru.ndg.practice.user.view.transfer.UserSave;
-import ru.ndg.practice.user.view.transfer.UserUpdate;
 import ru.ndg.practice.user.view.transfer.UserById;
 import ru.ndg.practice.user.view.transfer.UserList;
+import ru.ndg.practice.user.view.transfer.UserSave;
+import ru.ndg.practice.user.view.transfer.UserUpdate;
 
 import java.util.List;
 
@@ -44,12 +44,12 @@ class UserController {
         return userService.getUser(id);
     }
 
-    @PostMapping(value = {"/update"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/update"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateUser(@RequestBody @Validated(UserUpdate.class) UserView userView) {
         userService.updateUser(userView);
     }
 
-    @PostMapping(value = {"/save"}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = {"/save"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveUser(@RequestBody @Validated(UserSave.class) UserView userView) {
         userService.saveUser(userView);
     }
