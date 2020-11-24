@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.Application;
-import ru.ndg.practice.service.user.UserService;
-import ru.ndg.practice.view.UserView;
+import ru.ndg.practice.user.service.UserService;
+import ru.ndg.practice.user.view.UserView;
 
 import java.util.Collections;
 import java.util.List;

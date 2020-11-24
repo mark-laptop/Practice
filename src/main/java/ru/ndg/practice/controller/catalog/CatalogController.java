@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ndg.practice.controller.util.ControllerUtils;
-import ru.ndg.practice.service.citizenship.CitizenshipService;
-import ru.ndg.practice.service.document_type.DocumentTypeService;
-import ru.ndg.practice.view.CitizenshipView;
-import ru.ndg.practice.view.DocumentTypeView;
-import ru.ndg.practice.view.transfer.out.citizanship.CitizenshipCountries;
-import ru.ndg.practice.view.transfer.out.document_type.DocumentTypeDocs;
+import ru.ndg.practice.citizenship.service.CitizenshipService;
+import ru.ndg.practice.documenttype.service.DocumentTypeService;
+import ru.ndg.practice.citizenship.view.CitizenshipView;
+import ru.ndg.practice.documenttype.view.DocumentTypeView;
+import ru.ndg.practice.citizenship.view.transfer.CitizenshipCountries;
+import ru.ndg.practice.documenttype.view.transfer.DocumentTypeDocs;
 
 import java.util.List;
 
