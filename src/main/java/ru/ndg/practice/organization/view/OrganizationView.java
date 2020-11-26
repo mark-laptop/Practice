@@ -25,7 +25,7 @@ public class OrganizationView {
     private Integer id;
 
     @JsonView(value = {OrganizationList.class, OrganizationById.class})
-    @NotEmpty(groups = {OrganizationUpdate.class, OrganizationSave.class}, message = "Наименование не может быть пустым")
+    @NotEmpty(groups = {OrganizationList.class, OrganizationUpdate.class, OrganizationSave.class}, message = "Наименование не может быть пустым")
     @ApiModelProperty(value = "Наименование", example = "ООО Ромашка")
     private String name;
 

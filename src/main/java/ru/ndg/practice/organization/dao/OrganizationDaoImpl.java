@@ -26,11 +26,16 @@ public class OrganizationDaoImpl implements OrganizationDao {
         CriteriaQuery<Organization> organizationCriteria = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = organizationCriteria.from(Organization.class);
         organizationCriteria.select(organizationRoot);
-//        if (params != null && !params.isEmpty()) {
-//            for (Map.Entry<String, List<String>> param : params.entrySet()) {
-//                organizationCriteria.where(organizationRoot.get(param.getKey()).in(param.getValue()));
-//            }
-//        }
+        // TODO: 26.11.2020 Доработать запрос на и вместо или
+        if (organization.getName() != null) {
+                organizationCriteria.where(organizationRoot.get("name").in(organization.getName()));
+        }
+        if (organization.getInn() != null) {
+            organizationCriteria.where(organizationRoot.get("inn").in(organization.getInn()));
+        }
+        if (organization.getIsActive() != null) {
+            organizationCriteria.where(organizationRoot.get("isActive").in(organization.getIsActive()));
+        }
         return entityManager.createQuery(organizationCriteria).getResultList();
     }
 

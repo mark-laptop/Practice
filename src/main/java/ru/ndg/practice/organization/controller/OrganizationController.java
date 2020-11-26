@@ -33,7 +33,7 @@ class OrganizationController {
 
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrganizationView> getAllOrganizations(OrganizationView organization) {
+    public List<OrganizationView> getAllOrganizations(@Validated(OrganizationList.class) OrganizationView organization) {
         return organizationService.getAllOrganization(organization);
     }
 
