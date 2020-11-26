@@ -2,7 +2,6 @@ package ru.ndg.practice.user.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class UserDaoImpl implements UserDao {
