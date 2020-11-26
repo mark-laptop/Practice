@@ -13,9 +13,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -50,11 +47,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), status);
-    }
-
-    private Map<String, Object> putViewInBody(Object view) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("error", view);
-        return body;
     }
 }
