@@ -3,7 +3,6 @@ package ru.ndg.practice.organization.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,8 +33,8 @@ class OrganizationController {
 
     @JsonView(value = {OrganizationList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrganizationView> getAllOrganizations(@RequestParam(required = false) MultiValueMap<String, String> params) {
-        return organizationService.getAllOrganization(params);
+    public List<OrganizationView> getAllOrganizations(OrganizationView organization) {
+        return organizationService.getAllOrganization(organization);
     }
 
     @JsonView(value = {OrganizationById.class})

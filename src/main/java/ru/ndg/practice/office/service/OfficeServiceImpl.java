@@ -44,7 +44,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void saveOffice(OfficeView office) {
-        Organization organization = organizationDao.getById(office.orgId);
+        Organization organization = organizationDao.getById(office.getOrgId());
         Office officeEntity = mapperFacade.map(office, Office.class);
         officeEntity.setOrganization(organization);
         officeDao.save(officeEntity);
@@ -53,7 +53,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void updateOffice(OfficeView office) {
-        Office officeEntity = officeDao.getById(office.id);
+        Office officeEntity = officeDao.getById(office.getId());
         mapperFacade.map(office, officeEntity);
     }
 }

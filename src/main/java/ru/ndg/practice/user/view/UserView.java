@@ -3,6 +3,8 @@ package ru.ndg.practice.user.view;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 import ru.ndg.practice.citizenship.view.CitizenshipView;
 import ru.ndg.practice.document.view.DocumentView;
 import ru.ndg.practice.position.view.PositionView;
@@ -17,70 +19,72 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @ApiModel(value = "Сотрудник")
+@Getter
+@Setter
 public class UserView {
 
     @JsonView(value = {UserList.class, UserById.class})
     @NotNull(groups = {UserUpdate.class}, message = "id не может быть пустым")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public Integer id;
+    private Integer id;
 
     @JsonView(value = {UserList.class, UserById.class})
     @NotEmpty(groups = {UserUpdate.class, UserSave.class}, message = "Имя не может быть пустым")
     @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Имя не может быть больше 50 символов")
     @ApiModelProperty(value = "Имя", example = "Иван")
-    public String firstName;
+    private String firstName;
 
     @JsonView(value = {UserList.class, UserById.class})
     @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Фамилия не может быть больше 50 символов")
     @ApiModelProperty(value = "Фамилия", example = "Иванов")
-    public String secondName;
+    private String secondName;
 
     @JsonView(value = {UserList.class, UserById.class})
     @Size(max = 50, groups = {UserUpdate.class, UserSave.class}, message = "Отчество не может быть больше 50 символов")
     @ApiModelProperty(value = "Отчество", example = "Иванович")
-    public String middleName;
+    private String middleName;
 
     @JsonView(value = {UserById.class})
     @Size(max = 11)
     @ApiModelProperty(value = "Телефон", example = "89888888888")
-    public String phone;
+    private String phone;
 
     @NotNull(groups = {UserSave.class}, message = "id офиса не может быть пустым")
     @ApiModelProperty(value = "id офиса", example = "1")
-    public Integer officeId;
+    private Integer officeId;
 
     @JsonView(value = {UserList.class, UserById.class})
     @ApiModelProperty(value = "Должность", example = "Генеральный директор")
-    public PositionView position;
+    private PositionView position;
 
     @NotNull(groups = {UserUpdate.class, UserSave.class}, message = "id должности не может быть пустым")
     @ApiModelProperty(value = "id должности", example = "1")
-    public Integer positionId;
+    private Integer positionId;
 
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Гражданство", example = "Российская федерация")
-    public CitizenshipView citizenship;
+    private CitizenshipView citizenship;
 
     @ApiModelProperty(value = "Код гражданства", example = "1")
-    public Integer citizenshipCode;
+    private Integer citizenshipCode;
 
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "Документ", example = "Паспорт гражданина Российской Федерации")
-    public DocumentView document;
+    private DocumentView document;
 
     @ApiModelProperty(value = "Номер документа", example = "1234")
-    public String docNumber;
+    private String docNumber;
 
     @ApiModelProperty(value = "Дата документа", example = "0001-01-01")
-    public Date docDate;
+    private Date docDate;
 
     @ApiModelProperty(value = "Наименование документа", example = "Паспорт иностранного гражданина")
-    public String docName;
+    private String docName;
 
     @ApiModelProperty(value = "Код документа", example = "10")
-    public Short docCode;
+    private Short docCode;
 
     @JsonView(value = {UserById.class})
     @ApiModelProperty(value = "", example = "Да")
-    public Boolean isIdentified;
+    private Boolean isIdentified;
 }

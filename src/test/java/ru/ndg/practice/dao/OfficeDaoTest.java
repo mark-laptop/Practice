@@ -52,7 +52,7 @@ public class OfficeDaoTest {
         Integer id = 1;
         OfficeView office = officeService.getOffice(id);
         Assert.assertNotNull(office);
-        Assert.assertEquals(office.id, id);
+        Assert.assertEquals(office.getId(), id);
     }
 
     @Test

@@ -64,10 +64,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void saveUser(UserView user) {
         User userEntity = mapperFacade.map(user, User.class);
-        Office office = officeDao.getById(user.officeId);
-        Position position = positionDao.getById(user.positionId);
-        if (user.citizenshipCode != null) {
-            Citizenship citizenship = citizenshipDao.getByCode(user.citizenshipCode);
+        Office office = officeDao.getById(user.getOfficeId());
+        Position position = positionDao.getById(user.getPositionId());
+        if (user.getCitizenshipCode() != null) {
+            Citizenship citizenship = citizenshipDao.getByCode(user.getCitizenshipCode());
             userEntity.setCitizenship(citizenship);
         }
         if (documentParamExist(user)) {
@@ -82,15 +82,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(UserView user) {
-        User userEntity = userDao.getById(user.id);
+        User userEntity = userDao.getById(user.getId());
         mapperFacade.map(user, userEntity);
-        Position position = positionDao.getById(user.positionId);
-        if (user.officeId != null) {
-            Office office = officeDao.getById(user.officeId);
+        Position position = positionDao.getById(user.getPositionId());
+        if (user.getOfficeId() != null) {
+            Office office = officeDao.getById(user.getOfficeId());
             userEntity.setOffice(office);
         }
-        if (user.citizenshipCode != null) {
-            Citizenship citizenship = citizenshipDao.getByCode(user.citizenshipCode);
+        if (user.getCitizenshipCode() != null) {
+            Citizenship citizenship = citizenshipDao.getByCode(user.getCitizenshipCode());
             userEntity.setCitizenship(citizenship);
         }
         if (documentParamExist(user)) {
@@ -101,22 +101,22 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean documentParamExist(UserView userView) {
-        return userView.docNumber != null || userView.docDate != null || userView.docCode != null || userView.docName != null;
+        return userView.getDocNumber() != null || userView.getDocDate() != null || userView.getDocCode() != null || userView.getDocName() != null;
     }
 
     private Document getDocument(UserView userView) {
         Map<String, Object> params = new HashMap<>();
-        if (userView.docNumber != null) {
-            params.put("docNumber", userView.docNumber);
+        if (userView.getDocNumber() != null) {
+            params.put("docNumber", userView.getDocNumber());
         }
-        if (userView.docDate != null) {
-            params.put("docDate", userView.docDate);
+        if (userView.getDocDate() != null) {
+            params.put("docDate", userView.getDocDate());
         }
-        if (userView.docName != null) {
-            params.put("docName", userView.docName);
+        if (userView.getDocName() != null) {
+            params.put("docName", userView.getDocName());
         }
-        if (userView.docCode != null) {
-            params.put("docCode", userView.docCode);
+        if (userView.getDocCode() != null) {
+            params.put("docCode", userView.getDocCode());
         }
         return documentDao.getByParam(params);
     }

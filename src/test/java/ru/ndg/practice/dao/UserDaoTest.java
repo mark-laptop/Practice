@@ -52,7 +52,7 @@ public class UserDaoTest {
         Integer id = 1;
         UserView user = userService.getUser(id);
         Assert.assertNotNull(user);
-        Assert.assertEquals(user.id, id);
+        Assert.assertEquals(user.getId(), id);
     }
 
     @Test

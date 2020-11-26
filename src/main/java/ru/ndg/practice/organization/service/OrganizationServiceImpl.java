@@ -25,8 +25,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationView> getAllOrganization(MultiValueMap<String, String> params) {
-        List<Organization> listOrganizations = organizationDao.getAll(params);
+    public List<OrganizationView> getAllOrganization(OrganizationView organization) {
+        List<Organization> listOrganizations = organizationDao.getAll(
+                mapperFacade.map(organization, Organization.class));
         return mapperFacade.mapAsList(listOrganizations, OrganizationView.class);
     }
 
@@ -47,7 +48,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void updateOrganization(OrganizationView organization) {
-        Organization organizationEntity = organizationDao.getById(organization.id);
+        Organization organizationEntity = organizationDao.getById(organization.getId());
         mapperFacade.map(organization, organizationEntity);
     }
 }
