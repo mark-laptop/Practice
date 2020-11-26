@@ -23,16 +23,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll(MultiValueMap<String, String> params) {
+    public List<User> getAll(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> userCriteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = userCriteria.from(User.class);
         userCriteria.select(userRoot);
-        if (params != null && !params.isEmpty()) {
-            for (Map.Entry<String, List<String>> param : params.entrySet()) {
-                userCriteria.where(userRoot.get(param.getKey()).in(param.getValue()));
-            }
-        }
+        // TODO: 26.11.2020 Доделать
+//        if (params != null && !params.isEmpty()) {
+//            for (Map.Entry<String, List<String>> param : params.entrySet()) {
+//                userCriteria.where(userRoot.get(param.getKey()).in(param.getValue()));
+//            }
+//        }
         return entityManager.createQuery(userCriteria).getResultList();
     }
 

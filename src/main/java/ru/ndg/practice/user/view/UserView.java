@@ -49,7 +49,7 @@ public class UserView {
     @ApiModelProperty(value = "Телефон", example = "89888888888")
     private String phone;
 
-    @NotNull(groups = {UserSave.class}, message = "id офиса не может быть пустым")
+    @NotNull(groups = {UserList.class, UserSave.class}, message = "id офиса не может быть пустым")
     @ApiModelProperty(value = "id офиса", example = "1")
     private Integer officeId;
 

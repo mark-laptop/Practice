@@ -3,18 +3,17 @@ package ru.ndg.practice.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.MultiValueMap;
 import ru.ndg.practice.citizenship.dao.CitizenshipDao;
-import ru.ndg.practice.document.dao.DocumentDao;
-import ru.ndg.practice.office.dao.OfficeDao;
-import ru.ndg.practice.position.dao.PositionDao;
-import ru.ndg.practice.user.dao.UserDao;
 import ru.ndg.practice.citizenship.model.Citizenship;
-import ru.ndg.practice.document.model.Document;
-import ru.ndg.practice.office.model.Office;
-import ru.ndg.practice.position.model.Position;
-import ru.ndg.practice.user.model.User;
 import ru.ndg.practice.common.mapper.MapperFacade;
+import ru.ndg.practice.document.dao.DocumentDao;
+import ru.ndg.practice.document.model.Document;
+import ru.ndg.practice.office.dao.OfficeDao;
+import ru.ndg.practice.office.model.Office;
+import ru.ndg.practice.position.dao.PositionDao;
+import ru.ndg.practice.position.model.Position;
+import ru.ndg.practice.user.dao.UserDao;
+import ru.ndg.practice.user.model.User;
 import ru.ndg.practice.user.view.UserView;
 
 import java.util.HashMap;
@@ -48,8 +47,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserView> getAllUsers(MultiValueMap<String, String> params) {
-        List<User> listUsers = userDao.getAll(params);
+    public List<UserView> getAllUsers(UserView user) {
+        List<User> listUsers = userDao.getAll(mapperFacade.map(user, User.class));
         return mapperFacade.mapAsList(listUsers, UserView.class);
     }
 

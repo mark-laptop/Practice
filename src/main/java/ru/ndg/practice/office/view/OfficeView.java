@@ -43,7 +43,7 @@ public class OfficeView {
     @ApiModelProperty(value = "Действующий", example = "Да")
     private Boolean isActive;
 
-    @NotNull(groups = {OfficeSave.class}, message = "id организации должно быть заполнено")
+    @NotNull(groups = {OfficeList.class, OfficeSave.class}, message = "id организации должно быть заполнено")
     @ApiModelProperty(value = "id организации", example = "1")
     private Integer orgId;
 }

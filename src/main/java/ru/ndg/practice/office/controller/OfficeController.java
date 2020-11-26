@@ -3,14 +3,12 @@ package ru.ndg.practice.office.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ndg.practice.office.service.OfficeService;
 import ru.ndg.practice.office.view.OfficeView;
@@ -34,8 +32,8 @@ class OfficeController {
 
     @JsonView(value = {OfficeList.class})
     @GetMapping(value = {"/list"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OfficeView> getAllOffices(@RequestParam(required = false) MultiValueMap<String, String> params) {
-        return officeService.getAllOffices(params);
+    public List<OfficeView> getAllOffices(@Validated(OfficeList.class) OfficeView office) {
+        return officeService.getAllOffices(office);
     }
 
     @JsonView(value = {OfficeById.class})

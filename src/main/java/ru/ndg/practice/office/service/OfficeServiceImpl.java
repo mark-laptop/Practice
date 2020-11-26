@@ -3,12 +3,11 @@ package ru.ndg.practice.office.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.MultiValueMap;
-import ru.ndg.practice.office.dao.OfficeDao;
-import ru.ndg.practice.organization.dao.OrganizationDao;
-import ru.ndg.practice.office.model.Office;
 import ru.ndg.practice.common.mapper.MapperFacade;
+import ru.ndg.practice.office.dao.OfficeDao;
+import ru.ndg.practice.office.model.Office;
 import ru.ndg.practice.office.view.OfficeView;
+import ru.ndg.practice.organization.dao.OrganizationDao;
 import ru.ndg.practice.organization.model.Organization;
 
 import java.util.List;
@@ -29,8 +28,8 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OfficeView> getAllOffices(MultiValueMap<String, String> params) {
-        List<Office> listOffices = officeDao.getAll(params);
+    public List<OfficeView> getAllOffices(OfficeView office) {
+        List<Office> listOffices = officeDao.getAll(mapperFacade.map(office, Office.class));
         return mapperFacade.mapAsList(listOffices, OfficeView.class);
     }
 

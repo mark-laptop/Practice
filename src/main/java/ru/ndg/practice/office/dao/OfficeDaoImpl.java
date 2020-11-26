@@ -23,16 +23,17 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> getAll(MultiValueMap<String, String> params) {
+    public List<Office> getAll(Office office) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> officeCriteria = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = officeCriteria.from(Office.class);
         officeCriteria.select(officeRoot);
-        if (params != null && !params.isEmpty()) {
-            for (Map.Entry<String, List<String>> param : params.entrySet()) {
-                officeCriteria.where(officeRoot.get(param.getKey()).in(param.getValue()));
-            }
-        }
+        // TODO: 26.11.2020 Доделать
+//        if (params != null && !params.isEmpty()) {
+//            for (Map.Entry<String, List<String>> param : params.entrySet()) {
+//                officeCriteria.where(officeRoot.get(param.getKey()).in(param.getValue()));
+//            }
+//        }
         return entityManager.createQuery(officeCriteria).getResultList();
     }
 
